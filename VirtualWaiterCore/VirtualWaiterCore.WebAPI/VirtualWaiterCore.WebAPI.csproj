@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VirtualWaiterCore.Application.Abstraction\VirtualWaiterCore.Application.Abstraction.csproj" />
+    <ProjectReference Include="..\VirtualWaiterCore.Application.Services\VirtualWaiterCore.Application.Services.csproj" />
+    <ProjectReference Include="..\VirtualWaiterCore.Data.Abstraction\VirtualWaiterCore.Data.Abstraction.csproj" />
+    <ProjectReference Include="..\VirtualWaiterCore.Data.Repositories\VirtualWaiterCore.Data.Repositories.csproj" />
+    <ProjectReference Include="..\VirtualWaiterCore.EntityFramewrok\VirtualWaiterCore.EntityFramewrok.csproj" />
+  </ItemGroup>
+
+
+</Project>

@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VirtualWaiterCore.Data.Abstraction\VirtualWaiterCore.Data.Abstraction.csproj" />
+    <ProjectReference Include="..\VirtualWaiterCore.Domain\VirtualWaiterCore.Domain.csproj" />
+    <ProjectReference Include="..\VirtualWaiterCore.EntityFramewrok\VirtualWaiterCore.EntityFramewrok.csproj" />
+  </ItemGroup>
+
+</Project>

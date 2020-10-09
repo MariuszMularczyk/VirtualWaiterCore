@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VirtualWaiterCore.Dictionaries\VirtualWaiterCore.Dictionaries.csproj" />
+    <ProjectReference Include="..\VirtualWaiterCore.Domain.Core\VirtualWaiterCore.Domain.Core.csproj" />
+  </ItemGroup>
+
+</Project>
