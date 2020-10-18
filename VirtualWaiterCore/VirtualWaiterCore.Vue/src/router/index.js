@@ -24,6 +24,11 @@ export default new Router({
         path: '/administration/drink/add',
         name: 'administration.drink.add',
         component: () => import('@/views/administration/drinks/views/Add')
-    },  
+        },  
+    {
+        path: '/administration/drink/edit/:id',
+        name: 'administration.drink.edit',
+        component: () => import('@/views/administration/drinks/views/Edit')
+    }, 
   ]
 });

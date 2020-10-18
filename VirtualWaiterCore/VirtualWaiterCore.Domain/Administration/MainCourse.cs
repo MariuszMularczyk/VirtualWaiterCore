@@ -8,8 +8,8 @@ using VirtualWaiterCore.Dictionaries;
 
 namespace VirtualWaiterCore.Domain
 {
-    [Table("Drinks")]
-    public class Drink : Entity
+    [Table("MainCourses")]
+    public class MainCourse : Entity
     {
         public string Name { get; set; }
         public string Description { get; set; }

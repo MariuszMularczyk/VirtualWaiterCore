@@ -54,6 +54,15 @@ namespace VirtualWaiterCore.WebAPI
             // This will all go in the ROOT CONTAINER and is NOT TENANT SPECIFIC.IDrinkRepository
             builder.RegisterType<DrinkService>().As<IDrinkService>();
             builder.RegisterType<DrinkRepository>().As<IDrinkRepository>();
+
+            builder.RegisterType<DessertService>().As<IDessertService>();
+            builder.RegisterType<DessertRepository>().As<IDessertRepository>();
+
+            builder.RegisterType<AppetizerService>().As<IAppetizerService>();
+            builder.RegisterType<AppetizerRepository>().As<IAppetizerRepository>();
+
+            builder.RegisterType<MainCourseService>().As<IMainCourseService>();
+            builder.RegisterType<MainCourseRepository>().As<IMainCourseRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

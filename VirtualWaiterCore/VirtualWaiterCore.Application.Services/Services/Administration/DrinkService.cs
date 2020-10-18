@@ -26,7 +26,9 @@ namespace VirtualWaiterCore.Application
             {
                 Description = model.Description,
                 Name = model.Name,
-                Price = model.Price
+                Price = model.Price,
+                TimeOfPreparation = model.TimeOfPreparation,
+                Image = Convert.FromBase64String(model.Image)
             };
             _drinkRepository.Add(drink);
             _drinkRepository.Save();
@@ -35,5 +37,35 @@ namespace VirtualWaiterCore.Application
         {
             return _drinkRepository.GetAll();
         }
+
+        public DrinkEditVM GetDrink(int id) {
+
+            Drink drink = _drinkRepository.GetSingle(x => x.Id == id);
+            DrinkEditVM model = new DrinkEditVM()
+            {
+                Id = drink.Id,
+                Name = drink.Name,
+                Description = drink.Description,
+                Price = drink.Price,
+                TimeOfPreparation = drink.TimeOfPreparation,
+                Image = Convert.ToBase64String(drink.Image)
+            };
+            return model;
+        }
+        public void Edit(DrinkEditVM model)
+        {
+            Drink drink = new Drink()
+            {
+                Id = model.Id,
+                Name = model.Name,
+                Description = model.Description,
+                Price = model.Price,
+                TimeOfPreparation = model.TimeOfPreparation,
+                Image = Convert.FromBase64String(model.Image)
+            };
+            _drinkRepository.Edit(drink);
+            _drinkRepository.Save();
+        }
+
     }
 }

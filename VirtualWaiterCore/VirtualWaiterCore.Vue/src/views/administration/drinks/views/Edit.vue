@@ -1,10 +1,10 @@
 <template>
-    <form role="form" @submit.prevent="addDrink">
-
+    <form role="form" @submit.prevent="editDrink">
         <div class="form-group" width="500px" height="300px">
             <label for="image">Obraz</label>
-            <base64-upload id="image" @change="onChangeImage"></base64-upload>
+            <base64-upload id="image" :imageSrc="`data:image/jpeg;base64,`+ this.Image" @change="onChangeImage"></base64-upload>
         </div>
+
         <div class="form-group">
             <label for="drinkName">Nazwa</label>
             <input type="text" v-model="Name" class="form-control" id="drinkName">
@@ -15,7 +15,7 @@
             <textarea v-model="Description" id="description" class="form-control"></textarea>
         </div>
         <div class="form-group">
-            <label for="price" class="control-label">Cena</label>
+            <label for="price" class="control-label">cena</label>
             <input type="number" v-model="Price" id="price" class="form-control">
         </div>
         <div class="form-group">
@@ -28,34 +28,37 @@
 </template>
 
 <script>
-    import { mapActions } from "vuex";
+    import { mapActions, mapGetters } from "vuex";
     import { mapFields } from 'vuex-map-fields';
     import Base64Upload from 'vue-base64-upload'
-
-    const name = "administrationStore/drinkStore/addStore";
+    const name = "administrationStore/drinkStore/editStore";
     
     export default {
-        name: "DrinkAdd",
+        name: "DrinkEdit",
         data() {
             return {
+                srcImage:  this.getImage()
             }
         },
         computed: {
-            ...mapFields(name,['Drink.Name','Drink.Description', 'Drink.Price', 'Drink.TimeOfPreparation', 'Drink.Image',]),
+            ...mapFields(name,['editDrink.Name','editDrink.Description', 'editDrink.Price', 'editDrink.TimeOfPreparation', 'editDrink.Image',]),
         },
         methods: {
-            ...mapActions(name,['resetDrinkForm','addDrink', 'setImage']),
+            ...mapActions(name,['setDrinkForm','editDrink', 'setImage']),
+            ...mapGetters(name,['getImage']),
             onChangeImage(file) {
                 this.setImage(file.base64);
             }
-
+        },
+        beforeCreate(){
+            this.setDrinkForm();
         },
         mounted() {
-            this.resetDrinkForm();
+            
         },
         components: {
             Base64Upload
-          },
+        },
     }
 </script>
 

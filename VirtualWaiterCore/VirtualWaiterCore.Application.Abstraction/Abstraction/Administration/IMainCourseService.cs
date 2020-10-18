@@ -10,11 +10,11 @@ using VirtualWaiterCore.Data;
 
 namespace VirtualWaiterCore.Application
 {
-    public interface IDrinkService : IService
+    public interface IMainCourseService : IService
     {
-        void Add(DrinkAddVM model);
-        List<DrinkListDTO> GetDrinks();
-        DrinkEditVM GetDrink(int id);
-        void Edit(DrinkEditVM model);
+        void Add(MainCourseAddVM model);
+        List<MainCourseListDTO> GetMainCourses();
+        MainCourseEditVM GetMainCourse(int id);
+        void Edit(MainCourseEditVM model);
     }
 }

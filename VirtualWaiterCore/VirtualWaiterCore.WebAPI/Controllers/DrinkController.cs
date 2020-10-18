@@ -35,5 +35,15 @@ namespace VirtualWaiterCore.WebAPI.Controllers
         {
             return _drinkService.GetDrinks();
         }
+        [HttpGet("getDrink/{id}")]
+        public DrinkEditVM GetDrink(int id)
+        {
+            return _drinkService.GetDrink(id);
+        }
+        [HttpPost("edit")]
+        public void Edit(DrinkEditVM model)
+        {
+            _drinkService.Edit(model);
+        }
     }
 }

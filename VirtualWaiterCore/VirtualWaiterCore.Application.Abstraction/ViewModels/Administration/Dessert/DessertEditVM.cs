@@ -10,8 +10,9 @@ using System.Threading.Tasks;
 
 namespace VirtualWaiterCore.Application
 {
-    public class DrinkAddVM
+    public class DessertEditVM
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
@@ -19,4 +20,3 @@ namespace VirtualWaiterCore.Application
         public string Image { get; set; }
     }
 }
-

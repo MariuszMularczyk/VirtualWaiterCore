@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace VirtualWaiterCore.Data
 {
-    public class DrinkRepository : Repository<Drink, MainDatabaseContext>, IDrinkRepository
+    public class AppetizerRepository : Repository<Appetizer, MainDatabaseContext>, IAppetizerRepository
     {
-        public DrinkRepository(MainDatabaseContext context) : base(context)
+        public AppetizerRepository(MainDatabaseContext context) : base(context)
         { }
 
-        public List<DrinkListDTO> GetAll()
+        public List<AppetizerListDTO> GetAll()
         {
-            return Context.Drinks.Select(x => new DrinkListDTO()
+            return Context.Appetizers.Select(x => new AppetizerListDTO()
             {
                 Id = x.Id,
                 Name = x.Name,

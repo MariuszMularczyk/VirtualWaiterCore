@@ -1,21 +1,22 @@
-﻿using System;
+using VirtualWaiterCore.Dictionaries;
+using VirtualWaiterCore.Resources.Shared;
+using VirtualWaiterCore.Utils;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using VirtualWaiterCore.Dictionaries;
 
-namespace VirtualWaiterCore.Domain
+namespace VirtualWaiterCore.Application
 {
-    [Table("Drinks")]
-    public class Drink : Entity
+    public class DessertAddVM
     {
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
         public decimal TimeOfPreparation { get; set; }
-        public byte[] Image { get; set; }
-
+        public string Image { get; set; }
     }
 }
+

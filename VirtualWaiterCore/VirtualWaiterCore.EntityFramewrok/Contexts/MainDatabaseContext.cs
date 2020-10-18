@@ -62,6 +62,9 @@ namespace VirtualWaiterCore.EntityFramework
 
         #region Order
         public DbSet<Drink> Drinks { get; set; }
+        public DbSet<Dessert> Desserts { get; set; }
+        public DbSet<Appetizer> Appetizers { get; set; }
+        public DbSet<MainCourse> MainCourses { get; set; }
         public DbSet<Order> Order { get; set; }
         #endregion Order
 
