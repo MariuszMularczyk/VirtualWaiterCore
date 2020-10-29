@@ -67,5 +67,12 @@ namespace VirtualWaiterCore.Application
             _mainCourseRepository.Save();
         }
 
+        public void Delete(int id)
+        {
+            MainCourse mainCourse = _mainCourseRepository.GetSingle(x => x.Id == id);
+            _mainCourseRepository.Delete(mainCourse);
+            _mainCourseRepository.Save();
+        }
+
     }
 }

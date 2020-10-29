@@ -16,5 +16,6 @@ namespace VirtualWaiterCore.Application
         List<MainCourseListDTO> GetMainCourses();
         MainCourseEditVM GetMainCourse(int id);
         void Edit(MainCourseEditVM model);
+        void Delete(int id);
     }
 }

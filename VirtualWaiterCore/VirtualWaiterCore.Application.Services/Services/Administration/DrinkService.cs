@@ -66,6 +66,12 @@ namespace VirtualWaiterCore.Application
             _drinkRepository.Edit(drink);
             _drinkRepository.Save();
         }
+        public void Delete(int id)
+        {
+            Drink drink = _drinkRepository.GetSingle(x => x.Id == id);
+            _drinkRepository.Delete(drink);
+            _drinkRepository.Save();
+        }
 
     }
 }

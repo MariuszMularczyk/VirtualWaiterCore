@@ -1,8 +1,8 @@
 <template>
     <form role="form" @submit.prevent="editDrink">
-        <div class="form-group" width="500px" height="300px">
+        <div class="form-group" width="300px" height="150px">
             <label for="image">Obraz</label>
-            <base64-upload id="image" :imageSrc="`data:image/jpeg;base64,`+ this.Image" @change="onChangeImage"></base64-upload>
+            <file-uploader id="image" @change="onChangeImage" ></file-uploader>
         </div>
 
         <div class="form-group">
@@ -30,14 +30,13 @@
 <script>
     import { mapActions, mapGetters } from "vuex";
     import { mapFields } from 'vuex-map-fields';
-    import Base64Upload from 'vue-base64-upload'
     const name = "administrationStore/drinkStore/editStore";
-    
+    import FileUploader from '../views/FileUploaderEdit'
     export default {
         name: "DrinkEdit",
         data() {
             return {
-                srcImage:  this.getImage()
+                
             }
         },
         computed: {
@@ -48,16 +47,11 @@
             ...mapGetters(name,['getImage']),
             onChangeImage(file) {
                 this.setImage(file.base64);
-            }
+            },
         },
-        beforeCreate(){
-            this.setDrinkForm();
-        },
-        mounted() {
-            
-        },
+
         components: {
-            Base64Upload
+            FileUploader
         },
     }
 </script>

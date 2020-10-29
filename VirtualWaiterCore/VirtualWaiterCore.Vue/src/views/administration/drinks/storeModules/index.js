@@ -23,6 +23,10 @@ const actions = {
         axios.get('/drink/getDrinks')
             .then(({ data }) => commit('setDrinksList', data));
     },
+    deleteDrink({ dispatch  }, id) {
+        axios.delete('/drink/deleteDrink/'+ id)
+            .then(() => dispatch ('setDrinksList'));
+    },
 
 };
 

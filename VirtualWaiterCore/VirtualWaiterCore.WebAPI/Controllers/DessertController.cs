@@ -45,5 +45,10 @@ namespace VirtualWaiterCore.WebAPI.Controllers
         {
             _dessertService.Edit(model);
         }
+        [HttpDelete("deleteDessert/{id}")]
+        public void DessertDrink(int id)
+        {
+            _dessertService.Delete(id);
+        }
     }
 }

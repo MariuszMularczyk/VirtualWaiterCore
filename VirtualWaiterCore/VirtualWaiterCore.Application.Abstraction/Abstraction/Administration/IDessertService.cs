@@ -16,5 +16,6 @@ namespace VirtualWaiterCore.Application
         List<DessertListDTO> GetDesserts();
         DessertEditVM GetDessert(int id);
         void Edit(DessertEditVM model);
+        void Delete(int id);
     }
 }

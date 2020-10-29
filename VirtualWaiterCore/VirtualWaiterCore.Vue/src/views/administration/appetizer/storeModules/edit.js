@@ -3,7 +3,7 @@ import router from '@/router/index';
 import { getField, updateField } from 'vuex-map-fields';
 const namespaced = true;
 const state = {
-    editDrink: {
+    Appetizer: {
         Id: null,
         Name: '',
         Description: '',
@@ -15,45 +15,42 @@ const state = {
 
 const getters = {
     getField,
-    getEditDrink(state) {
-        return state.editDrink;
-    },
-    getImage(state) {
-        return state.editDrink.Image;
+    getAppetizer(state) {
+        return state.Appetizer;
     },
 };
 
 const mutations = {
     updateField,
-    updateUserField(state, drink) {
-        state.editDrink.Name = drink.Name;
-        state.editDrink.Description = drink.Description;
-        state.editDrink.Price = drink.Price;
-        state.editDrink.TimeOfPreparation = drink.TimeOfPreparation;
-        state.editDrink.Image = drink.Image;
+    updateUserField(state, appetizer) {
+        state.Appetizer.Name = appetizer.Name;
+        state.Appetizer.Description = appetizer.Description;
+        state.Appetizer.Price = appetizer.Price;
+        state.Appetizer.TimeOfPreparation = appetizer.TimeOfPreparation;
+        state.Appetizer.Image = appetizer.Image;
     },
     setForm(state, payload) {
-        state.editDrink.Id = payload.id;
-        state.editDrink.Name = payload.name;
-        state.editDrink.Description = payload.description;
-        state.editDrink.Price = payload.price;
-        state.editDrink.TimeOfPreparation = payload.timeOfPreparation;
-        state.editDrink.Image = payload.image;
+        state.Appetizer.Id = payload.id;
+        state.Appetizer.Name = payload.name;
+        state.Appetizer.Description = payload.description;
+        state.Appetizer.Price = payload.price;
+        state.Appetizer.TimeOfPreparation = payload.timeOfPreparation;
+        state.Appetizer.Image = payload.image;
     },
     setImage(state, image) {
-        state.editDrink.Image = image;
+        state.Appetizer.Image = image;
     },
     convertImage(state) {
-        state.editDrink.Image = `data:image/png;base64,` +state.editDrink.Image;
+        state.Appetizer.Image = `data:image/png;base64,` + state.Appetizer.Image;
     },
 };
 
 const actions = {
-    editDrink({ state }, ) {
-        axios.post('/drink/edit', state.editDrink).then(() => router.push({ name: 'administration.drinksList' }));
+    editAppetizer({ state }, ) {
+        axios.post('/appetizer/edit', state.Appetizer).then(() => router.push({ name: 'administration.appetizersList' }));
     },
-    setDrinkForm({ commit }) {
-        axios.get('/drink/getDrink/' + router.currentRoute.params.id).then(({ data }) => commit('setForm', data));
+    setAppetizerForm({ commit }) {
+        axios.get('/appetizer/getAppetizer/' + router.currentRoute.params.id).then(({ data }) => commit('setForm', data));
         commit('convertImage');
     },
     setImage({ commit }, image) {

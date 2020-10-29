@@ -1,13 +1,13 @@
 <template>
-    <form role="form" @submit.prevent="editDrink">
+    <form role="form" @submit.prevent="editMainCourse">
         <div class="form-group" width="500px" height="300px">
             <label for="image">Obraz</label>
-            <base64-upload id="image" :imageSrc="`data:image/jpeg;base64,`+ this.Image" @change="onChangeImage"></base64-upload>
+            <file-uploader id="image" @change="onChangeImage"></file-uploader>
         </div>
 
         <div class="form-group">
-            <label for="drinkName">Nazwa</label>
-            <input type="text" v-model="Name" class="form-control" id="drinkName">
+            <label for="name">Nazwa</label>
+            <input type="text" v-model="Name" class="form-control" id="name">
         </div>
 
         <div class="form-group">
@@ -23,41 +23,36 @@
             <input type="number" v-model="TimeOfPreparation" id="timeOfPreparation" class="form-control">
         </div>
         <button type="submit" class="btn btn-primary">Zapisz</button>
-        <router-link :to="{name: 'administration.drinksList'}"><button type="default" class="btn btn-primary" style="margin-left: 20px;">Wróć</button></router-link>
+        <router-link :to="{name: 'administration.mainCoursesList'}"><button type="default" class="btn btn-primary" style="margin-left: 20px;">Wróć</button></router-link>
     </form>
 </template>
 
 <script>
-    import { mapActions, mapGetters } from "vuex";
+    import { mapActions } from "vuex";
     import { mapFields } from 'vuex-map-fields';
-    import Base64Upload from 'vue-base64-upload'
-    const name = "administrationStore/drinkStore/editStore";
+    import FileUploader from '../views/FileUploaderEdit'
+    const name = "administrationStore/mainCourseStore/editStore";
     
     export default {
-        name: "DrinkEdit",
+        name: "MainCourseEdit",
         data() {
-            return {
-                srcImage:  this.getImage()
+            return {     
             }
         },
         computed: {
-            ...mapFields(name,['editDrink.Name','editDrink.Description', 'editDrink.Price', 'editDrink.TimeOfPreparation', 'editDrink.Image',]),
+            ...mapFields(name,['MainCourse.Name','MainCourse.Description', 'MainCourse.Price', 'MainCourse.TimeOfPreparation', 'MainCourse.Image',]),
         },
         methods: {
-            ...mapActions(name,['setDrinkForm','editDrink', 'setImage']),
-            ...mapGetters(name,['getImage']),
+            ...mapActions(name,['setMainCourseForm','editMainCourse', 'setImage']),
             onChangeImage(file) {
                 this.setImage(file.base64);
             }
         },
-        beforeCreate(){
-            this.setDrinkForm();
-        },
         mounted() {
-            
+            this.setMainCourseForm();
         },
         components: {
-            Base64Upload
+            FileUploader
         },
     }
 </script>

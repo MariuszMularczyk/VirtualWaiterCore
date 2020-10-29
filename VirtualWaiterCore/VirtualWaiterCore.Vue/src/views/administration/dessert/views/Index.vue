@@ -1,8 +1,8 @@
 <template>
     <div>
         <div class="list-buttons">
-            <router-link :to="{name: 'administration.drink.add'}" class="btn btn-primary">
-                Dodaj napój
+            <router-link :to="{name: 'administration.dessert.add'}" class="btn btn-primary">
+                Dodaj deser
             </router-link>
         </div>
         <table class="table">
@@ -17,17 +17,17 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="drink of getDrinksList()" :key="`category-${drink.id}`">
-                    <td width="300px"><img width="300px" :src= "`data:image/png;base64,${drink.image}`"/></td>
-                    <td class="name-column">{{ drink.name }}</td>
-                    <td>{{ drink.description }}</td>
-                    <td>{{ drink.price }}</td>
-                    <td>{{ drink.timeOfPreparation }}</td>
+                <tr v-for="dessert of getDessertsList()" :key="`category-${dessert.id}`">
+                    <td width="300px"><img width="300px" :src= "`data:image/png;base64,${dessert.image}`"/></td>
+                    <td class="name-column">{{ dessert.name }}</td>
+                    <td>{{ dessert.description }}</td>
+                    <td>{{ dessert.price }}</td>
+                    <td>{{ dessert.timeOfPreparation }}</td>
                     <td class="buttons-column">
-                        <button class="btn btn-warning" @click.prevent="goToEdit(drink.id)">
+                        <router-link :to="{name: 'administration.dessert.edit', params: {id: dessert.id}}" class="btn btn-warning">
                             Edytuj
-                        </button>
-                        <button class="btn btn-danger" @click.prevent="deleteDrink(drink.id)">
+                        </router-link>
+                        <button class="btn btn-danger" @click.prevent="deleteDessert(dessert.id)">
                             Usuń
                         </button>
                     </td>
@@ -41,11 +41,11 @@
 <script>
 
     import { mapActions, mapGetters } from 'vuex';
-    const name = "administrationStore/drinkStore/indexStore";
-    const edit = "administrationStore/drinkStore/editStore";
+    const name = "administrationStore/dessertStore/indexStore";
+
 
     export default {
-        name: "DrinksList",
+        name: "DessertsList",
         data() {
             return {
             }
@@ -53,16 +53,11 @@
         computed: {
         },
         methods: {
-            ...mapActions(name,['setDrinksList', 'deleteDrink']),
-            ...mapGetters(name,['getDrinksList']),
-            ...mapActions(edit,['setDrinkForm2',]),
-            goToEdit(id) {
-                this.setDrinkForm2(id).then(this.$router.push({name: 'administration.drink.edit', params: {id: id}}))
-                
-            }
+            ...mapActions(name,['setDessertsList', 'deleteDessert']),
+            ...mapGetters(name,['getDessertsList'])
         },
         mounted() {
-            this.setDrinksList();
+            this.setDessertsList();
         },
     }
 </script>

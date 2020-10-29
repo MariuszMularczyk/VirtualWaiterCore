@@ -2,28 +2,31 @@ import axios from 'axios';
 const namespaced = true;
 
 const state = {
-    drinksList: null
+    mainCoursesList: null
 };
 
 const getters = {
-  getDrinksList(state) {
-        return state.drinksList;
+  getMainCoursesList(state) {
+        return state.mainCoursesList;
   },
 };
 
 const mutations = {
-  setDrinksList(state, payload) {
-        state.drinksList = payload;
+  setMainCoursesList(state, payload) {
+        state.mainCoursesList = payload;
   },
 
 };
 
 const actions = {
-    setDrinksList({commit}) {
-        axios.get('/drink/getDrinks')
-            .then(({ data }) => commit('setDrinksList', data));
+    setMainCoursesList({commit}) {
+        axios.get('/mainCourse/getMainCourses')
+            .then(({ data }) => commit('setMainCoursesList', data));
     },
-
+    deleteMainCourse({ dispatch }, id) {
+        axios.delete('/mainCourse/deleteMainCourse/' + id)
+            .then(() => dispatch('setMainCoursesList'));
+    },
 };
 
 export default {namespaced, state, getters, mutations, actions };

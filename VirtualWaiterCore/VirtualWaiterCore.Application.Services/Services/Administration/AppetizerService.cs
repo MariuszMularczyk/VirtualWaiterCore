@@ -67,5 +67,12 @@ namespace VirtualWaiterCore.Application
             _appetizerRepository.Save();
         }
 
+        public void Delete(int id)
+        {
+            Appetizer appetizer = _appetizerRepository.GetSingle(x => x.Id == id);
+            _appetizerRepository.Delete(appetizer);
+            _appetizerRepository.Save();
+        }
+
     }
 }

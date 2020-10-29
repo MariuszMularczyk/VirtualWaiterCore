@@ -4,7 +4,7 @@ import { getField, updateField } from 'vuex-map-fields';
 const namespaced = true;
 
 const state = {
-    Drink: {
+    MainCourse: {
         Name: '',
         Description: '',
         TimeOfPreparation: 0,
@@ -15,37 +15,37 @@ const state = {
 
 const getters = {
     getField,
-    getDrink(state) {
-        return state.Drink;
+    getMainCourse(state) {
+        return state.MainCourse;
     },
 };
 
 const mutations = {
     updateField,
-    updateUserField(state, drink) {
-        state.Drink.Name = drink.Name;
-        state.Drink.Description = drink.Description;
-        state.Drink.Price = drink.Price;
-        state.Drink.TimeOfPreparation = drink.TimeOfPreparation;
-        state.Drink.Image = drink.Image;
+    updateUserField(state, mainCourse) {
+        state.MainCourse.Name = mainCourse.Name;
+        state.MainCourse.Description = mainCourse.Description;
+        state.MainCourse.Price = mainCourse.Price;
+        state.MainCourse.TimeOfPreparation = mainCourse.TimeOfPreparation;
+        state.MainCourse.Image = mainCourse.Image;
     },
     resetForm(state) {
-        state.Drink.Name ='';
-        state.Drink.Description = '';
-        state.Drink.TimeOfPreparation = 0;
-        state.Drink.Image = '';
-        state.Drink.Price = 0;
+        state.MainCourse.Name ='';
+        state.MainCourse.Description = '';
+        state.MainCourse.TimeOfPreparation = 0;
+        state.MainCourse.Image = '';
+        state.MainCourse.Price = 0;
     },
     setImage(state, image) {
-        state.Drink.Image = image;
+        state.MainCourse.Image = image;
     },
 };
 
 const actions = {
-    addDrink({ state }, ) {
-        axios.post('/drink/add', state.Drink).then(() => router.push({ name: 'administration.drinksList' }));
+    addMainCourse({ state }, ) {
+        axios.post('/mainCourse/add', state.MainCourse).then(() => router.push({ name: 'administration.mainCoursesList' }));
     },
-    resetDrinkForm({ commit }, ) {
+    resetMainCourseForm({ commit }, ) {
         commit('resetForm');
     },
     setImage({ commit },image ) {

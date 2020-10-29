@@ -1,8 +1,8 @@
 <template>
     <div>
         <div class="list-buttons">
-            <router-link :to="{name: 'administration.drink.add'}" class="btn btn-primary">
-                Dodaj napój
+            <router-link :to="{name: 'administration.mainCourse.add'}" class="btn btn-primary">
+                Dodaj danie główne
             </router-link>
         </div>
         <table class="table">
@@ -17,17 +17,17 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="drink of getDrinksList()" :key="`category-${drink.id}`">
-                    <td width="300px"><img width="300px" :src= "`data:image/png;base64,${drink.image}`"/></td>
-                    <td class="name-column">{{ drink.name }}</td>
-                    <td>{{ drink.description }}</td>
-                    <td>{{ drink.price }}</td>
-                    <td>{{ drink.timeOfPreparation }}</td>
+                <tr v-for="mainCourse of getMainCoursesList()" :key="`category-${mainCourse.id}`">
+                    <td width="300px"><img width="300px" :src= "`data:image/png;base64,${mainCourse.image}`"/></td>
+                    <td class="name-column">{{ mainCourse.name }}</td>
+                    <td>{{ mainCourse.description }}</td>
+                    <td>{{ mainCourse.price }}</td>
+                    <td>{{ mainCourse.timeOfPreparation }}</td>
                     <td class="buttons-column">
-                        <button class="btn btn-warning" @click.prevent="goToEdit(drink.id)">
+                        <router-link :to="{name: 'administration.mainCourse.edit', params: {id: mainCourse.id}}" class="btn btn-warning">
                             Edytuj
-                        </button>
-                        <button class="btn btn-danger" @click.prevent="deleteDrink(drink.id)">
+                        </router-link>
+                        <button class="btn btn-danger" @click.prevent="deleteMainCourse(mainCourse.id)">
                             Usuń
                         </button>
                     </td>
@@ -41,11 +41,11 @@
 <script>
 
     import { mapActions, mapGetters } from 'vuex';
-    const name = "administrationStore/drinkStore/indexStore";
-    const edit = "administrationStore/drinkStore/editStore";
+    const name = "administrationStore/mainCourseStore/indexStore";
+
 
     export default {
-        name: "DrinksList",
+        name: "MainCoursesList",
         data() {
             return {
             }
@@ -53,16 +53,11 @@
         computed: {
         },
         methods: {
-            ...mapActions(name,['setDrinksList', 'deleteDrink']),
-            ...mapGetters(name,['getDrinksList']),
-            ...mapActions(edit,['setDrinkForm2',]),
-            goToEdit(id) {
-                this.setDrinkForm2(id).then(this.$router.push({name: 'administration.drink.edit', params: {id: id}}))
-                
-            }
+            ...mapActions(name,['setMainCoursesList', 'deleteMainCourse']),
+            ...mapGetters(name,['getMainCoursesList'])
         },
         mounted() {
-            this.setDrinksList();
+            this.setMainCoursesList();
         },
     }
 </script>

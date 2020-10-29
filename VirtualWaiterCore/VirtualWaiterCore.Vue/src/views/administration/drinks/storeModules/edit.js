@@ -56,6 +56,10 @@ const actions = {
         axios.get('/drink/getDrink/' + router.currentRoute.params.id).then(({ data }) => commit('setForm', data));
         commit('convertImage');
     },
+    setDrinkForm2({ commit }, id) {
+        axios.get('/drink/getDrink/' + id).then(({ data }) => commit('setForm', data));
+        commit('convertImage');
+    },
     setImage({ commit }, image) {
         commit('setImage', image);
     }

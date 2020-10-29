@@ -35,15 +35,23 @@ namespace VirtualWaiterCore.WebAPI.Controllers
         {
             return _mainCourseService.GetMainCourses();
         }
+
         [HttpGet("getMainCourse/{id}")]
         public MainCourseEditVM GetMainCourse(int id)
         {
             return _mainCourseService.GetMainCourse(id);
         }
+
         [HttpPost("edit")]
         public void Edit(MainCourseEditVM model)
         {
             _mainCourseService.Edit(model);
+        }
+
+        [HttpDelete("deleteMainCourse/{id}")]
+        public void DeleteMainCourse(int id)
+        {
+            _mainCourseService.Delete(id);
         }
     }
 }

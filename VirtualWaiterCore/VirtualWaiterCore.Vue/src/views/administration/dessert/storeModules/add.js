@@ -4,7 +4,7 @@ import { getField, updateField } from 'vuex-map-fields';
 const namespaced = true;
 
 const state = {
-    Drink: {
+    Dessert: {
         Name: '',
         Description: '',
         TimeOfPreparation: 0,
@@ -15,37 +15,37 @@ const state = {
 
 const getters = {
     getField,
-    getDrink(state) {
-        return state.Drink;
+    getDessert(state) {
+        return state.Dessert;
     },
 };
 
 const mutations = {
     updateField,
-    updateUserField(state, drink) {
-        state.Drink.Name = drink.Name;
-        state.Drink.Description = drink.Description;
-        state.Drink.Price = drink.Price;
-        state.Drink.TimeOfPreparation = drink.TimeOfPreparation;
-        state.Drink.Image = drink.Image;
+    updateUserField(state, dessert) {
+        state.Dessert.Name = dessert.Name;
+        state.Dessert.Description = dessert.Description;
+        state.Dessert.Price = dessert.Price;
+        state.Dessert.TimeOfPreparation = dessert.TimeOfPreparation;
+        state.Dessert.Image = dessert.Image;
     },
     resetForm(state) {
-        state.Drink.Name ='';
-        state.Drink.Description = '';
-        state.Drink.TimeOfPreparation = 0;
-        state.Drink.Image = '';
-        state.Drink.Price = 0;
+        state.Dessert.Name ='';
+        state.Dessert.Description = '';
+        state.Dessert.TimeOfPreparation = 0;
+        state.Dessert.Image = '';
+        state.Dessert.Price = 0;
     },
     setImage(state, image) {
-        state.Drink.Image = image;
+        state.Dessert.Image = image;
     },
 };
 
 const actions = {
-    addDrink({ state }, ) {
-        axios.post('/drink/add', state.Drink).then(() => router.push({ name: 'administration.drinksList' }));
+    addDessert({ state }, ) {
+        axios.post('/dessert/add', state.Dessert).then(() => router.push({ name: 'administration.dessertsList' }));
     },
-    resetDrinkForm({ commit }, ) {
+    resetDessertForm({ commit }, ) {
         commit('resetForm');
     },
     setImage({ commit },image ) {
