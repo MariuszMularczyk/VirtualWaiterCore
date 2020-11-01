@@ -65,7 +65,9 @@ namespace VirtualWaiterCore.EntityFramework
         public DbSet<Dessert> Desserts { get; set; }
         public DbSet<Appetizer> Appetizers { get; set; }
         public DbSet<MainCourse> MainCourses { get; set; }
-        public DbSet<Order> Order { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ProductOrder> ProductsOrders { get; set; }
+        public DbSet<Order> Orders { get; set; }
         #endregion Order
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -79,6 +81,10 @@ namespace VirtualWaiterCore.EntityFramework
             modelBuilder.ApplyConfiguration(new AppRoleConfiguration());
             modelBuilder.ApplyConfiguration(new FunctionalityAppRoleConfiguration());
             modelBuilder.ApplyConfiguration(new FunctionalityConfiguration());
+            #endregion Membership
+
+            #region Membership
+            modelBuilder.ApplyConfiguration(new ProductOrderConfiguration());
             #endregion Membership
         }
     }

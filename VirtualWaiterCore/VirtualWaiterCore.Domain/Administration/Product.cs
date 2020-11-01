@@ -8,11 +8,15 @@ using VirtualWaiterCore.Dictionaries;
 
 namespace VirtualWaiterCore.Domain
 {
-    [Table("Orders")]
-    public class Order : Entity
+    [Table("Products")]
+    public class Product : Entity
     {
+        public string Name { get; set; }
         public string Description { get; set; }
-        public OrderStatusEnum OrderStatus { get; set; }
+        public decimal Price { get; set; }
+        public decimal TimeOfPreparation { get; set; }
+        public byte[] Image { get; set; }
+        public ProductType ProductType { get; set; }
         public List<ProductOrder> ProductOrders { get; set; }
 
     }

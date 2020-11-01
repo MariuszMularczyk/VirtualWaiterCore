@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using VirtualWaiterCore.Application;
 using VirtualWaiterCore.Data;
+using VirtualWaiterCore.Dictionaries;
 
 namespace VirtualWaiterCore.WebAPI.Controllers
 {
@@ -14,41 +15,41 @@ namespace VirtualWaiterCore.WebAPI.Controllers
     public class DrinkController : ControllerBase
     {
 
-        private readonly IDrinkService _drinkService;
+        private readonly IProductService _productService;
 
-        public DrinkController(IDrinkService DrinkService)
+        public DrinkController(IProductService productService)
         {
-            _drinkService = DrinkService;
+            _productService = productService;
         }
 
         [HttpPost("add")]
-        public void Add(DrinkAddVM model)
+        public void Add(ProductAddVM model)
         {
             if (ModelState.IsValid)
             {
-                _drinkService.Add(model);
+                _productService.Add(model, ProductType.Drink);
             }
         }
 
         [HttpGet("getDrinks")]
-        public List<DrinkListDTO> GetDrinks()
+        public List<ProductListDTO> GetDrinks()
         {
-            return _drinkService.GetDrinks();
+            return _productService.GetProducts(ProductType.Drink);
         }
         [HttpGet("getDrink/{id}")]
-        public DrinkEditVM GetDrink(int id)
+        public ProductEditVM GetDrink(int id)
         {
-            return _drinkService.GetDrink(id);
+            return _productService.GetProduct(id);
         }
         [HttpPost("edit")]
-        public void Edit(DrinkEditVM model)
+        public void Edit(ProductEditVM model)
         {
-            _drinkService.Edit(model);
+            _productService.Edit(model);
         }
         [HttpDelete("deleteDrink/{id}")]
         public void DeleteDrink(int id)
         {
-             _drinkService.Delete(id);
+            _productService.Delete(id);
         }
     }
 }

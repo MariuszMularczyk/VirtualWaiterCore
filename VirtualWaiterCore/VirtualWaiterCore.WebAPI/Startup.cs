@@ -63,6 +63,9 @@ namespace VirtualWaiterCore.WebAPI
 
             builder.RegisterType<MainCourseService>().As<IMainCourseService>();
             builder.RegisterType<MainCourseRepository>().As<IMainCourseRepository>();
+
+            builder.RegisterType<ProductService>().As<IProductService>();
+            builder.RegisterType<ProductRepository>().As<IProductRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

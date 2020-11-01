@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using VirtualWaiterCore.Application;
 using VirtualWaiterCore.Data;
+using VirtualWaiterCore.Dictionaries;
 
 namespace VirtualWaiterCore.WebAPI.Controllers
 {
@@ -14,42 +15,42 @@ namespace VirtualWaiterCore.WebAPI.Controllers
     public class AppetizerController : ControllerBase
     {
 
-        private readonly IAppetizerService _appetizerService;
+        private readonly IProductService _productService;
 
-        public AppetizerController(IAppetizerService appetizerService)
+        public AppetizerController(IProductService productService)
         {
-            _appetizerService = appetizerService;
+            _productService = productService;
         }
 
         [HttpPost("add")]
-        public void Add(AppetizerAddVM model)
+        public void Add(ProductAddVM model)
         {
             if (ModelState.IsValid)
             {
-                _appetizerService.Add(model);
+                _productService.Add(model, ProductType.Appetizer);
             }
         }
 
         [HttpGet("getAppetizers")]
-        public List<AppetizerListDTO> GetDrinks()
+        public List<ProductListDTO> GetDrinks()
         {
-            return _appetizerService.GetAppetizers();
+            return _productService.GetProducts(ProductType.Appetizer);
         }
         [HttpGet("getAppetizer/{id}")]
-        public AppetizerEditVM GetDrink(int id)
+        public ProductEditVM GetDrink(int id)
         {
-            return _appetizerService.GetAppetizer(id);
+            return _productService.GetProduct(id);
         }
         [HttpPost("edit")]
-        public void Edit(AppetizerEditVM model)
+        public void Edit(ProductEditVM model)
         {
-            _appetizerService.Edit(model);
+            _productService.Edit(model);
         }
 
         [HttpDelete("deleteAppetizer/{id}")]
         public void DeleteAppetizer(int id)
         {
-            _appetizerService.Delete(id);
+            _productService.Delete(id);
         }
     }
 }

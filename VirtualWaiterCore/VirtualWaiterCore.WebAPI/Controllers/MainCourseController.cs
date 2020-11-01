@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using VirtualWaiterCore.Application;
 using VirtualWaiterCore.Data;
+using VirtualWaiterCore.Dictionaries;
 
 namespace VirtualWaiterCore.WebAPI.Controllers
 {
@@ -14,44 +15,44 @@ namespace VirtualWaiterCore.WebAPI.Controllers
     public class MainCourseController : ControllerBase
     {
 
-        private readonly IMainCourseService _mainCourseService;
+        private readonly IProductService _productService;
 
-        public MainCourseController(IMainCourseService MainCourseService)
+        public MainCourseController(IProductService productService)
         {
-            _mainCourseService = MainCourseService;
+            _productService = productService;
         }
 
         [HttpPost("add")]
-        public void Add(MainCourseAddVM model)
+        public void Add(ProductAddVM model)
         {
             if (ModelState.IsValid)
             {
-                _mainCourseService.Add(model);
+                _productService.Add(model, ProductType.MainCourse);
             }
         }
 
         [HttpGet("getMainCourses")]
-        public List<MainCourseListDTO> GetMainCourses()
+        public List<ProductListDTO> GetMainCourses()
         {
-            return _mainCourseService.GetMainCourses();
+            return _productService.GetProducts(ProductType.MainCourse);
         }
 
         [HttpGet("getMainCourse/{id}")]
-        public MainCourseEditVM GetMainCourse(int id)
+        public ProductEditVM GetMainCourse(int id)
         {
-            return _mainCourseService.GetMainCourse(id);
+            return _productService.GetProduct(id);
         }
 
         [HttpPost("edit")]
-        public void Edit(MainCourseEditVM model)
+        public void Edit(ProductEditVM model)
         {
-            _mainCourseService.Edit(model);
+            _productService.Edit(model);
         }
 
         [HttpDelete("deleteMainCourse/{id}")]
         public void DeleteMainCourse(int id)
         {
-            _mainCourseService.Delete(id);
+            _productService.Delete(id);
         }
     }
 }
