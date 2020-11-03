@@ -69,11 +69,21 @@ export default new Router({
         path: '/administration/mainCourse/add',
         name: 'administration.mainCourse.add',
         component: () => import('@/views/administration/mainCourse/views/Add')
-        },  
+    },  
     {
         path: '/administration/mainCourse/edit/:id',
         name: 'administration.mainCourse.edit',
         component: () => import('@/views/administration/mainCourse/views/Edit')
+    },
+    {
+        path: '/order/menu',
+        name: 'order.menu',
+        component: () => import('@/views/order/order/views/Index')
+    },
+    {
+        path: '/order/setTable',
+        name: 'order.setTable',
+        component: () => import('@/views/order/order/views/SetTable')
     },
   ]
 });

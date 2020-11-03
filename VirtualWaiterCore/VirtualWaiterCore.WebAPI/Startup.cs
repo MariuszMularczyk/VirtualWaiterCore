@@ -52,17 +52,6 @@ namespace VirtualWaiterCore.WebAPI
         public void ConfigureContainer(ContainerBuilder builder)
         {
             // This will all go in the ROOT CONTAINER and is NOT TENANT SPECIFIC.IDrinkRepository
-            builder.RegisterType<DrinkService>().As<IDrinkService>();
-            builder.RegisterType<DrinkRepository>().As<IDrinkRepository>();
-
-            builder.RegisterType<DessertService>().As<IDessertService>();
-            builder.RegisterType<DessertRepository>().As<IDessertRepository>();
-
-            builder.RegisterType<AppetizerService>().As<IAppetizerService>();
-            builder.RegisterType<AppetizerRepository>().As<IAppetizerRepository>();
-
-            builder.RegisterType<MainCourseService>().As<IMainCourseService>();
-            builder.RegisterType<MainCourseRepository>().As<IMainCourseRepository>();
 
             builder.RegisterType<ProductService>().As<IProductService>();
             builder.RegisterType<ProductRepository>().As<IProductRepository>();

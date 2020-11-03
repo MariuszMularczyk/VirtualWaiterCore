@@ -14,11 +14,10 @@ namespace VirtualWaiterCore.WebAPI.Controllers
     {
 
         private readonly ILogger<WeatherForecastController> _logger;
-        private readonly IDrinkService _drinkService;
 
-        public WeatherForecastController(IDrinkService DrinkService, ILogger<WeatherForecastController> logger)
+
+        public WeatherForecastController( ILogger<WeatherForecastController> logger)
         {
-            _drinkService = DrinkService;
             _logger = logger;
         }
 
@@ -31,7 +30,7 @@ namespace VirtualWaiterCore.WebAPI.Controllers
         [HttpGet("getWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
-            _drinkService.GetDrinks();
+
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {

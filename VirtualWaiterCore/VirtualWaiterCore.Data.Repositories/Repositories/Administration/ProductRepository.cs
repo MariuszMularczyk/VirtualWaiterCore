@@ -23,7 +23,8 @@ namespace VirtualWaiterCore.Data
                 Description = x.Description,
                 Price = x.Price,
                 TimeOfPreparation = x.TimeOfPreparation,
-                Image = Convert.ToBase64String(x.Image)
+                Image = Convert.ToBase64String(x.Image),
+                ProductType = x.ProductType
             }).Where(x => x.ProductType == producType).ToList();
         }
 
