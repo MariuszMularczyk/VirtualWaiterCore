@@ -24,13 +24,16 @@
             }
         },
         computed: {
-              ...mapFields(name,['Table']),
+              ...mapFields(name,['Order.Table']),
         },
         methods: {
-            ...mapActions(name,['setAppetizersList']),
+            ...mapActions(name,['setAppetizersList','setDessertsList','setDrinksList', 'setMainCoursesList']),
         },
         mounted() {
             this.setAppetizersList();
+            this.setDessertsList();
+            this.setDrinksList();
+            this.setMainCoursesList();
         },
         components: {
 

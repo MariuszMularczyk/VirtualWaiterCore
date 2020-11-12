@@ -14,7 +14,7 @@ namespace VirtualWaiterCore.Data
         public ProductRepository(MainDatabaseContext context) : base(context)
         { }
 
-        public List<ProductListDTO> GetAll(ProductType producType)
+        public virtual List<ProductListDTO> GetAll(ProductType producType)
         {
             return Context.Products.Select(x => new ProductListDTO()
             {

@@ -85,5 +85,10 @@ export default new Router({
         name: 'order.setTable',
         component: () => import('@/views/order/order/views/SetTable')
     },
+    {
+        path: '/order/cart',
+        name: 'order.cart',
+        component: () => import('@/views/order/order/views/Cart')
+    },
   ]
 });

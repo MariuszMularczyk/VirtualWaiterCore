@@ -80,9 +80,10 @@ namespace VirtualWaiterCore.EntityFramework
             modelBuilder.ApplyConfiguration(new FunctionalityConfiguration());
             #endregion Membership
 
-            #region Membership
+            #region Core
             modelBuilder.ApplyConfiguration(new ProductOrderConfiguration());
-            #endregion Membership
+            modelBuilder.ApplyConfiguration(new ProductConfiguration());
+            #endregion Core
         }
     }
 }

@@ -13,18 +13,33 @@ namespace VirtualWaiterCore.Application
     public class OrderService : ServiceBase, IOrderService
     {
         #region Dependencies
-        public IOrderRepository OrderRepository { get; set; }
+        public IOrderRepository _orderRepository { get; set; }
+        public IProductRepository _productRepository { get; set; }
+        public IProductOrderRepository _productOrderRepository { get; set; }
         #endregion
+
 
         public void Add(OrderAddVM model)
         {
             Order order = new Order()
             {
-                Description = model.Order,
-                OrderStatus = (OrderStatusEnum)model.OrderStatusId
-        };
-            OrderRepository.Add(order);
-            OrderRepository.Save();
+                Table = model.Table,
+                OrderStatus = OrderStatusEnum.Awaiting
+            };
+
+            _orderRepository.Add(order);
+            _orderRepository.Save();
+            foreach(var item in model.ProductOrders)
+            {
+                ProductOrder productOrder = new ProductOrder()
+                {
+                    Order = order,
+                    Product = _productRepository.GetSingle(x => x.Id == item.ProductId),
+                    Quantity = item.Quantity
+                };
+                _productOrderRepository.Add(productOrder);
+            }
+            _productOrderRepository.Save();
         }
 
     }

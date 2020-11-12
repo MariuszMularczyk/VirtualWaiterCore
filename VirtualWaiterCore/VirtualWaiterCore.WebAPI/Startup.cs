@@ -16,6 +16,7 @@ using VirtualWaiterCore.Application;
 using VirtualWaiterCore.Data;
 using System.Reflection;
 using Autofac.Extensions.DependencyInjection;
+using VirtualWaiterCore.Infrastructure;
 
 namespace VirtualWaiterCore.WebAPI
 {
@@ -53,8 +54,25 @@ namespace VirtualWaiterCore.WebAPI
         {
             // This will all go in the ROOT CONTAINER and is NOT TENANT SPECIFIC.IDrinkRepository
 
-            builder.RegisterType<ProductService>().As<IProductService>();
-            builder.RegisterType<ProductRepository>().As<IProductRepository>();
+            builder.RegisterType<MainContext>().AsSelf().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<TransactionInterceptor>().AsSelf().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<DbSession>().AsSelf().PropertiesAutowired().InstancePerLifetimeScope();
+
+            builder.Register(context => MainDatabaseContext.Create()).As<MainDatabaseContext>().PropertiesAutowired().InstancePerLifetimeScope();
+            builder.RegisterType<TransactionInterceptor>().InstancePerLifetimeScope();
+
+
+            builder.RegisterType<ProductService>().As<IProductService>().PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies).InstancePerLifetimeScope();
+            builder.RegisterType<ProductService>().As<ProductService>().PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies).InstancePerLifetimeScope();
+            builder.RegisterType<ProductRepository>().As<IProductRepository>().PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies).InstancePerLifetimeScope();
+            builder.RegisterType<ProductRepository>().As<ProductRepository>().PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies).InstancePerLifetimeScope();
+
+            builder.RegisterType<OrderService>().As<IOrderService>().PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies).InstancePerLifetimeScope();
+            builder.RegisterType<OrderService>().As<OrderService>().PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies).InstancePerLifetimeScope();
+            builder.RegisterType<OrderRepository>().As<IOrderRepository>().PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies).InstancePerLifetimeScope();
+            builder.RegisterType<OrderRepository>().As<OrderRepository>().PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies).InstancePerLifetimeScope();
+            builder.RegisterType<ProductOrderRepository>().As<IProductOrderRepository>().PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies).InstancePerLifetimeScope();
+            builder.RegisterType<ProductOrderRepository>().As<ProductOrderRepository>().PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies).InstancePerLifetimeScope();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

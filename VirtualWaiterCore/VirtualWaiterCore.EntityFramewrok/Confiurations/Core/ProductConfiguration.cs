@@ -9,12 +9,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace VirtualWaiterCore.EntityFramework
 {
-    public class ProductOrderConfiguration : IEntityTypeConfiguration<ProductOrder>
+    public class ProductConfiguration : IEntityTypeConfiguration<Product>
     {
-        public void Configure(EntityTypeBuilder<ProductOrder> builder)
+        public void Configure(EntityTypeBuilder<Product> builder)
         {
-            builder.HasOne(x => x.Product)
-                .WithMany(x => x.ProductOrders)
+            builder.HasMany(x => x.ProductOrders)
+                .WithOne(x => x.Product)
                 .IsRequired()
                 .HasForeignKey(x => x.ProductId);
         }

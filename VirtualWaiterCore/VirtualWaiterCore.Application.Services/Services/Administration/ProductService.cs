@@ -15,12 +15,9 @@ namespace VirtualWaiterCore.Application
     {
 
         public IProductRepository _productRepository { get; set; }
-        public ProductService(IProductRepository productRepository)
-        {
-            _productRepository = productRepository;
-        }
 
-        public void Add(ProductAddVM model, ProductType productType)
+
+        public virtual void Add(ProductAddVM model, ProductType productType)
         {
             Product product = new Product()
             {
@@ -34,12 +31,12 @@ namespace VirtualWaiterCore.Application
             _productRepository.Add(product);
             _productRepository.Save();
         }
-        public List<ProductListDTO>GetProducts(ProductType productType)
+        public virtual List<ProductListDTO>GetProducts(ProductType productType)
         {
             return _productRepository.GetAll(productType);
         }
 
-        public ProductEditVM GetProduct(int id) {
+        public virtual ProductEditVM GetProduct(int id) {
 
             Product product = _productRepository.GetSingle(x => x.Id == id);
             ProductEditVM model = new ProductEditVM()
@@ -53,7 +50,7 @@ namespace VirtualWaiterCore.Application
             };
             return model;
         }
-        public void Edit(ProductEditVM model)
+        public virtual void Edit(ProductEditVM model)
         {
             Product product = _productRepository.GetSingle(x => x.Id == model.Id);
 
@@ -67,7 +64,7 @@ namespace VirtualWaiterCore.Application
             _productRepository.Save();
         }
 
-        public void Delete(int id)
+        public virtual void Delete(int id)
         {
             Product product = _productRepository.GetSingle(x => x.Id == id);
             _productRepository.Delete(product);

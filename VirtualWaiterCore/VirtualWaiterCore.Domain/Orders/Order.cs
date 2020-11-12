@@ -11,9 +11,9 @@ namespace VirtualWaiterCore.Domain
     [Table("Orders")]
     public class Order : Entity
     {
-        public string Description { get; set; }
+        public string Table { get; set; }
         public OrderStatusEnum OrderStatus { get; set; }
-        public List<ProductOrder> ProductOrders { get; set; }
+        public virtual List<ProductOrder> ProductOrders { get; set; }
 
     }
 }

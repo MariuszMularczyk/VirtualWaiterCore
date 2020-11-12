@@ -10,10 +10,11 @@ using System.Threading.Tasks;
 
 namespace VirtualWaiterCore.Application
 {
-    public class OrderAddVM
+    public class ProductOrderAddVM
     {
-        public string Table { get; set; }
-        public List<ProductOrderAddVM> ProductOrders { get; set; }
+
+        public int ProductId { get; set; }
+        public int Quantity { get; set; }
     }
 }
 

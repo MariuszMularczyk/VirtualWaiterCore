@@ -13,6 +13,10 @@ namespace VirtualWaiterCore.EntityFramework
     {
         public void Configure(EntityTypeBuilder<Order> builder)
         {
+            builder.HasMany(x => x.ProductOrders)
+                .WithOne(x => x.Order)
+                .IsRequired()
+                .HasForeignKey(x => x.OrderId);
         }
     }
 }
