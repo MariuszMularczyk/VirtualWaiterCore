@@ -14,7 +14,7 @@ namespace VirtualWaiterCore.Data
         public ProductRepository(MainDatabaseContext context) : base(context)
         { }
 
-        public virtual List<ProductListDTO> GetAll(ProductType producType)
+        public virtual List<ProductListDTO> GetAll(ProductType productType)
         {
             return Context.Products.Select(x => new ProductListDTO()
             {
@@ -25,7 +25,7 @@ namespace VirtualWaiterCore.Data
                 TimeOfPreparation = x.TimeOfPreparation,
                 Image = Convert.ToBase64String(x.Image),
                 ProductType = x.ProductType
-            }).Where(x => x.ProductType == producType).ToList();
+            }).Where(x => x.ProductType == productType).ToList();
         }
 
     }

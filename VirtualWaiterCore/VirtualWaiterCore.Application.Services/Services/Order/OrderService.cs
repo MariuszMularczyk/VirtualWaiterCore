@@ -24,7 +24,12 @@ namespace VirtualWaiterCore.Application
             Order order = new Order()
             {
                 Table = model.Table,
-                OrderStatus = OrderStatusEnum.Awaiting
+                OrderStatus = OrderStatusEnum.Awaiting,
+                AppetizerStatus = OrderStatusEnum.Awaiting,
+                MainCourseStatus = OrderStatusEnum.Awaiting,
+                DessertsStatus = OrderStatusEnum.Awaiting,
+                DrinksStatus = OrderStatusEnum.Awaiting,
+                TimeOfOrder = DateTime.Now
             };
 
             _orderRepository.Add(order);
@@ -40,6 +45,11 @@ namespace VirtualWaiterCore.Application
                 _productOrderRepository.Add(productOrder);
             }
             _productOrderRepository.Save();
+        }
+
+        public virtual List<OrderListDTO> GetOrders()
+        {
+            return _orderRepository.GetOrders();
         }
 
     }

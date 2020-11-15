@@ -90,5 +90,10 @@ export default new Router({
         name: 'order.cart',
         component: () => import('@/views/order/order/views/Cart')
     },
+    {
+        path: '/kitchen/orders',
+        name: 'kitchen.orders',
+        component: () => import('@/views/order/kitchen/views/Index')
+    },
   ]
 });

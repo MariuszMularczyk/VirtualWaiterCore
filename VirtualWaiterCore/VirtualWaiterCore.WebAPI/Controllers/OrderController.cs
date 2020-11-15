@@ -31,6 +31,11 @@ namespace VirtualWaiterCore.WebAPI.Controllers
             }
         }
 
-        
+        [HttpGet("getOrders")]
+        public object GetOrders()
+        {
+               return  _orderService.GetOrders();
+        }
+
     }
 }

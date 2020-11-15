@@ -1,24 +1,26 @@
-﻿using System;
+using VirtualWaiterCore.Dictionaries;
+using VirtualWaiterCore.Utils;
+using VirtualWaiterCore.Infrastructure;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using VirtualWaiterCore.Dictionaries;
 
-namespace VirtualWaiterCore.Domain
+namespace VirtualWaiterCore.Data
 {
-    [Table("Orders")]
-    public class Order : Entity
+    public class OrderItemDTO
     {
-        public string Table { get; set; }
         public OrderStatusEnum OrderStatus { get; set; }
         public OrderStatusEnum AppetizerStatus { get; set; }
         public OrderStatusEnum MainCourseStatus { get; set; }
         public OrderStatusEnum DessertsStatus { get; set; }
         public OrderStatusEnum DrinksStatus { get; set; }
-        public virtual List<ProductOrder> ProductOrders { get; set; }
+        public int OrderId { get; set; }
+        public string Table { get; set; }
         public DateTime TimeOfOrder { get; set; }
 
     }
 }
+
