@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <div>
         <div class="list-buttons">
             <router-link :to="{name: 'administration.drink.add'}" class="btn btn-primary">

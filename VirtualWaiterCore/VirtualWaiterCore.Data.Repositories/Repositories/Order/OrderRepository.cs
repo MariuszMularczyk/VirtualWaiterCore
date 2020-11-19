@@ -41,7 +41,7 @@ namespace VirtualWaiterCore.Data
                         TimeOfPreparation = x.Product.TimeOfPreparation
                     }).Where(x => x.ProductType == Dictionaries.ProductType.Appetizer && x.OrderId == item.OrderId).ToList();
 
-                    if (productsAppetizers.Count() > 0)
+                    if (productsAppetizers.Any())
                     {
                         StringBuilder stringAppetizers = new StringBuilder("Przystawki: \n");
                         foreach (ProductItemDTO product in productsAppetizers)
@@ -75,7 +75,7 @@ namespace VirtualWaiterCore.Data
                         TimeOfPreparation = x.Product.TimeOfPreparation
                     }).Where(x => x.ProductType == Dictionaries.ProductType.MainCourse && x.OrderId == item.OrderId).ToList();
 
-                    if (productsMainCourses.Count() > 0)
+                    if (productsMainCourses.Any())
                     {
                         StringBuilder stringMainCourses = new StringBuilder("Dania g³ówne: \n");
                         foreach (ProductItemDTO product in productsMainCourses)
@@ -109,7 +109,7 @@ namespace VirtualWaiterCore.Data
                         TimeOfPreparation = x.Product.TimeOfPreparation
                     }).Where(x => x.ProductType == Dictionaries.ProductType.Dessert && x.OrderId == item.OrderId).ToList();
 
-                    if (productsDeserts.Count() > 0)
+                    if (productsDeserts.Any())
                     {
                         StringBuilder stringDeserts = new StringBuilder("Desery: \n");
                         foreach (ProductItemDTO product in productsDeserts)
@@ -130,6 +130,59 @@ namespace VirtualWaiterCore.Data
                             ProductType = Dictionaries.ProductType.Dessert,
                         };
                         orders.Add(deserts);
+                    }
+                }
+            }
+            return orders;
+        }
+
+        public virtual List<OrderListDTO> GetDrinks()
+        {
+            List<OrderListDTO> orders = new List<OrderListDTO>();
+
+            List<OrderItemDTO> ordersId = Context.Orders.Select(x => new OrderItemDTO()
+            {
+                OrderId = x.Id,
+                Table = x.Table,
+                OrderStatus = x.OrderStatus,
+                TimeOfOrder = x.TimeOfOrder,
+                DrinksStatus = x.DrinksStatus,
+            }).Where(x => x.OrderStatus != Dictionaries.OrderStatusEnum.Done).ToList();
+            int OrderItemId = 1;
+            foreach (OrderItemDTO item in ordersId)
+            {
+                if (item.DrinksStatus == Dictionaries.OrderStatusEnum.Awaiting)
+                {
+                    List<ProductItemDTO> drinks = Context.ProductsOrders.Select(x => new ProductItemDTO()
+                    {
+                        Quantity = x.Quantity,
+                        ProductName = x.Product.Name,
+                        ProductType = x.Product.ProductType,
+                        OrderId = x.OrderId,
+                        TimeOfPreparation = x.Product.TimeOfPreparation
+                    }).Where(x => x.ProductType == Dictionaries.ProductType.Drink && x.OrderId == item.OrderId).ToList();
+
+                    if (drinks.Any())
+                    {
+                        StringBuilder stringDrinks = new StringBuilder("Napoje: \n");
+                        foreach (ProductItemDTO product in drinks)
+                        {
+                            stringDrinks.Append(product.Quantity);
+                            stringDrinks.Append(" x ");
+                            stringDrinks.Append(product.ProductName);
+                            stringDrinks.Append(", \n");
+                        }
+                        OrderListDTO appetizers = new OrderListDTO()
+                        {
+                            OrderItemId = OrderItemId++,
+                            OrderId = item.OrderId,
+                            Table = item.Table,
+                            Order = stringDrinks.ToString(),
+                            TimeOfOrder = item.TimeOfOrder,
+                            TimeOfPreparation = drinks.Max(x => x.TimeOfPreparation),
+                            ProductType = Dictionaries.ProductType.Appetizer,
+                        };
+                        orders.Add(appetizers);
                     }
                 }
             }

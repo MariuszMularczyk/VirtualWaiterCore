@@ -19,7 +19,7 @@ namespace VirtualWaiterCore.Application
         #endregion
 
 
-        public void Add(OrderAddVM model)
+        public List<OrderListDTO> Add(OrderAddVM model)
         {
             Order order = new Order()
             {
@@ -45,12 +45,16 @@ namespace VirtualWaiterCore.Application
                 _productOrderRepository.Add(productOrder);
             }
             _productOrderRepository.Save();
+            return _orderRepository.GetOrders();
         }
 
         public virtual List<OrderListDTO> GetOrders()
         {
             return _orderRepository.GetOrders();
         }
-
+        public virtual List<OrderListDTO> GetDrinks()
+        {
+            return _orderRepository.GetDrinks();
+        }
     }
 }

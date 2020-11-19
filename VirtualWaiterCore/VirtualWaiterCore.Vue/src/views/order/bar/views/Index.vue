@@ -8,24 +8,19 @@
                 <tr>
                     <th scope="col">Stolik</th>
                     <th scope="col" class="name-column">Zamówienie</th>
-                    <th scope="col">Sugerowana godzina rozpoczęcia</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="order of ordersList" :key="`order-${order.orderItemId}`">
-                    <td width="300px">{{order.table}}</td>
+                <tr v-for="drink of drinksOrderList" :key="`drink-${drink.orderItemId}`">
+                    <td width="300px">{{drink.table}}</td>
                     <td class="name-column">
-                        {{order.order}}
-                    </td>
-                    <td>
-                        {{order.timeOfOrder}}
+                        {{drink.order}}
                     </td>
                     <td class="buttons-column">
                         <button class="btn btn-warning">
                             Edytuj
                         </button>
-
                     </td>
                 </tr>
             </tbody>
@@ -40,36 +35,45 @@
     import { HubConnectionBuilder } from '@microsoft/signalr';
     import { mapFields } from 'vuex-map-fields';
 
-    const name = "ordersStore/kitchenStore/indexStore";
+    const name = "ordersStore/barStore/indexStore";
     import Vuesax from 'vuesax'
     import Vue from 'vue'
     import 'vuesax/dist/vuesax.css'
+    import swal from 'sweetalert'
+
     Vue.use(Vuesax)
     const conn = new HubConnectionBuilder().withUrl("https://localhost:44379/kitchen/ordersHub").build();
     conn.start();
 
     export default {
-        name: "OrderList",
+        name: "DrinkList",
         data() {
             return {
 
             }
         },
         computed: {
-            ...mapFields(name, ['ordersList']),
+            ...mapFields(name, ['drinksOrderList']),
+
         },
         methods: {
-            ...mapGetters(name, ['getOrdersList']),
-            ...mapActions(name, ['setOrdersList']),
+            ...mapGetters(name, ['getDrinksOrdersList']),
+            ...mapActions(name, ['setDrinksOrderList']),
         },
         mounted() {
-            conn.on("TakeOrders", data => {
-                console.log(data);
-                this.ordersList = data;
-            }) 
+            conn.on("TakeDrinks", data => {
+                this.drinksOrderList = data;
+            })
+            conn.on("SendWaiter", data => {
+                swal({
+                    title: "Wezwano kelnera! ",
+                    text: 'Stolik ' + data + ' wzywa kelnera',
+                    icon: "warning",
+                }) 
+            })
         },
         created() {
-            this.setOrdersList();
+            this.setDrinksOrderList();
         },
         components: {
 

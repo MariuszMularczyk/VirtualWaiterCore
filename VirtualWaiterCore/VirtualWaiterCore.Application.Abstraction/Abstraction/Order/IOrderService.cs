@@ -13,7 +13,8 @@ namespace VirtualWaiterCore.Application
 {
     public interface IOrderService : IService
     {
-        void Add(OrderAddVM model);
+        List<OrderListDTO> Add(OrderAddVM model);
         List<OrderListDTO> GetOrders();
+        List<OrderListDTO> GetDrinks();
     }
 }

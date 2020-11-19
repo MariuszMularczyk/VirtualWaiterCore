@@ -17,6 +17,8 @@ using VirtualWaiterCore.Data;
 using System.Reflection;
 using Autofac.Extensions.DependencyInjection;
 using VirtualWaiterCore.Infrastructure;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.AspNetCore.Http.Connections;
 
 namespace VirtualWaiterCore.WebAPI
 {
@@ -40,14 +42,21 @@ namespace VirtualWaiterCore.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers().AddNewtonsoftJson();
+            
             services.AddDbContext<MainDatabaseContext>(o => o.UseSqlServer(Configuration.GetConnectionString("MainDatabaseContext")));
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
-                builder.AllowAnyOrigin()
+                builder.WithOrigins("http://localhost:8081")
                        .AllowAnyMethod()
-                       .AllowAnyHeader();
+                       .AllowAnyHeader()
+                       .AllowCredentials();
             }));
+
+            services.AddSignalR(options =>
+            {
+                options.EnableDetailedErrors = true;
+            });
+            services.AddControllers().AddNewtonsoftJson();
 
         }
         public void ConfigureContainer(ContainerBuilder builder)
@@ -73,6 +82,9 @@ namespace VirtualWaiterCore.WebAPI
             builder.RegisterType<OrderRepository>().As<OrderRepository>().PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies).InstancePerLifetimeScope();
             builder.RegisterType<ProductOrderRepository>().As<IProductOrderRepository>().PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies).InstancePerLifetimeScope();
             builder.RegisterType<ProductOrderRepository>().As<ProductOrderRepository>().PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies).InstancePerLifetimeScope();
+
+
+            builder.RegisterType<OrderHub>().ExternallyOwned();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -84,19 +96,22 @@ namespace VirtualWaiterCore.WebAPI
                 app.UseDeveloperExceptionPage();
             }
 
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
             app.UseCors("MyPolicy");
 
             db.Database.EnsureCreated();
 
             app.UseHttpsRedirection();
 
-            app.UseRouting();
-
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<OrderHub>("/kitchen/ordersHub");
             });
         }
     }

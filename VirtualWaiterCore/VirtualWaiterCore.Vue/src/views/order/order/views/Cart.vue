@@ -1,7 +1,7 @@
-<template>
+ï»¿<template>
     <div class="cart">
         <div v-if="!cartItemsArray.length">
-            Brak produktów
+            Brak produktÃ³w
         </div>
 
         <div class="cart__wrapper">
@@ -10,12 +10,12 @@
             </div>
 
             <div class="cart__details">
-                Wartoœæ twojego zamówienia: <strong>{{cartTotal}} z³</strong>
+                WartoÅ›Ä‡ twojego zamÃ³wienia: <strong>{{cartTotal}} zÅ‚</strong>
             </div>
 
             <div class="cart__buttons">
                 <button class="btn button" @click.prevent="goToMenu()">
-                    Wróæ
+                    WrÃ³Ä‡
                 </button>
 
                 <button class="btn button--red" @click.prevent="popupActivo2=true">
@@ -23,7 +23,7 @@
                 </button>
 
                 <button :disabled="!cartItemsArray.length" class="btn button" @click.prevent="popupActivo=true">
-                    Zamów
+                    ZamÃ³w
                 </button>
             </div>
         </div>
@@ -32,7 +32,7 @@
             <vs-dialog not-close prevent-close square v-model="popupActivo">
                 <template #header>
                     <h4 class="not-margin">
-                        Czy na pewno chcesz z³o¿yæ zamówienie?
+                        Czy na pewno chcesz zÅ‚oÅ¼yÄ‡ zamÃ³wienie?
                     </h4>
                 </template>
 
@@ -50,7 +50,7 @@
             <vs-dialog not-close prevent-close square v-model="popupActivo2">
                 <template #header>
                     <h4 class="not-margin">
-                        Czy na pewno chcesz anulowaæ zamówienie?
+                        Czy na pewno chcesz anulowaÄ‡ zamÃ³wienie?
                     </h4>
                 </template>
 

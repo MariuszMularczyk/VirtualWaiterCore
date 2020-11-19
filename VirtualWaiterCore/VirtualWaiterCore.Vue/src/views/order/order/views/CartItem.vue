@@ -1,10 +1,10 @@
-<template>
+﻿<template>
     <div class="cart-item">
         <div class="cart-item__info">
             <h5 class="card-title">{{ cartItem.quantity }} x {{ cartItem.product.name }} </h5>
 
             <div class="cart-item__info__right">
-                <strong>{{ totalPrice }} z�</strong>
+                <strong>{{ totalPrice }} zł</strong>
 
                 <div class="cart-item__info__right__buttons">
                     <a @click.prevent="reduce(cartItem.id)" :disabled="!canRemoveQuantity" class="btn btn-info"

@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
+    <PackageReference Include="System.Text.Encodings.Web" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\VirtualWaiterCore.Data.Abstraction\VirtualWaiterCore.Data.Abstraction.csproj" />
     <ProjectReference Include="..\VirtualWaiterCore.Domain\VirtualWaiterCore.Domain.csproj" />
     <ProjectReference Include="..\VirtualWaiterCore.EntityFramewrok\VirtualWaiterCore.EntityFramewrok.csproj" />
