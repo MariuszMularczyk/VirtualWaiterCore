@@ -19,6 +19,7 @@ using Autofac.Extensions.DependencyInjection;
 using VirtualWaiterCore.Infrastructure;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.Http.Connections;
+using Autofac.Extras.DynamicProxy;
 
 namespace VirtualWaiterCore.WebAPI
 {

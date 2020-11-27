@@ -26,7 +26,6 @@ const actions = {
         axios.get('/order/getOrders')
             .then(({ data }) => commit('setOrderssList', data));
     },
-
 };
 
 export default {namespaced, state, getters, mutations, actions };

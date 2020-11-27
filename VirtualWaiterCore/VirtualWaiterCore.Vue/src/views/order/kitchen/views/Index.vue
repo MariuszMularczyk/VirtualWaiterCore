@@ -22,8 +22,8 @@
                         {{order.timeOfOrder}}
                     </td>
                     <td class="buttons-column">
-                        <button class="btn btn-warning">
-                            Edytuj
+                        <button class="btn btn-warning" @click.prevent="readyToPickUp(order)">
+                            Wydano
                         </button>
 
                     </td>
@@ -39,7 +39,7 @@
     import { mapGetters, mapActions } from 'vuex';
     import { HubConnectionBuilder } from '@microsoft/signalr';
     import { mapFields } from 'vuex-map-fields';
-
+    import axios from 'axios';
     const name = "ordersStore/kitchenStore/indexStore";
     import Vuesax from 'vuesax'
     import Vue from 'vue'
@@ -61,6 +61,12 @@
         methods: {
             ...mapGetters(name, ['getOrdersList']),
             ...mapActions(name, ['setOrdersList']),
+            readyToPickUp(order) {
+                axios.post(`order/setStatus`, { orderId: order.orderId, productType: order.productType })
+                    .then(() => {
+                        this.ordersList = this.ordersList.filter(orderElement => orderElement !== order);
+                    })
+            }
         },
         mounted() {
             conn.on("TakeOrders", data => {

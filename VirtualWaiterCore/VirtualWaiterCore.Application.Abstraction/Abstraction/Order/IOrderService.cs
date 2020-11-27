@@ -16,5 +16,6 @@ namespace VirtualWaiterCore.Application
         List<OrderListDTO> Add(OrderAddVM model);
         List<OrderListDTO> GetOrders();
         List<OrderListDTO> GetDrinks();
+        void SetStatus(int orderId, int productType);
     }
 }

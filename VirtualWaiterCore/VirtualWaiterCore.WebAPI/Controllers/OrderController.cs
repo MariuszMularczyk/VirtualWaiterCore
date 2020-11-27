@@ -53,6 +53,11 @@ namespace VirtualWaiterCore.WebAPI.Controllers
             return _orderService.GetDrinks();
         }
 
+        [HttpPost("setStatus")]
+        public void SetStatus(OrderStatus order)
+        {
+             _orderService.SetStatus(order.OrderId, order.ProductType);
+        }
 
     }
 }

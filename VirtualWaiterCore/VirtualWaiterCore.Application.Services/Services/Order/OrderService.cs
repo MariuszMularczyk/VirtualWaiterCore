@@ -56,5 +56,36 @@ namespace VirtualWaiterCore.Application
         {
             return _orderRepository.GetDrinks();
         }
+        public virtual void SetStatus(int orderId, int productType)
+        {
+            Order order = _orderRepository.GetSingle(x => x.Id == orderId);
+
+            switch (productType)
+            {
+                case 1:
+                    order.AppetizerStatus = OrderStatusEnum.Done;
+                    break;
+                case 2:
+                    order.DessertsStatus = OrderStatusEnum.Done;
+                    break;
+                case 3:
+                    order.DrinksStatus = OrderStatusEnum.Done;
+                    break;
+                case 4:
+                    order.MainCourseStatus = OrderStatusEnum.Done;
+                    break;
+            }
+            if(order.AppetizerStatus == OrderStatusEnum.Done && order.DessertsStatus == OrderStatusEnum.Done && order.DrinksStatus == OrderStatusEnum.Done && order.MainCourseStatus == OrderStatusEnum.Done)
+            {
+                order.OrderStatus = OrderStatusEnum.Done;
+            }
+            else
+            {
+                order.OrderStatus = OrderStatusEnum.InProgress;
+            }
+
+            _orderRepository.Edit(order);
+            _orderRepository.Save();
+        }
     }
 }

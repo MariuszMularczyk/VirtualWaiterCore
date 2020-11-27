@@ -18,8 +18,8 @@
                         {{drink.order}}
                     </td>
                     <td class="buttons-column">
-                        <button class="btn btn-warning">
-                            Edytuj
+                        <button class="btn btn-warning" @click.prevent="readyToPickUp(order)">
+                            Wydano
                         </button>
                     </td>
                 </tr>
@@ -34,12 +34,13 @@
     import { mapGetters, mapActions } from 'vuex';
     import { HubConnectionBuilder } from '@microsoft/signalr';
     import { mapFields } from 'vuex-map-fields';
-
+    import axios from 'axios';
     const name = "ordersStore/barStore/indexStore";
     import Vuesax from 'vuesax'
     import Vue from 'vue'
     import 'vuesax/dist/vuesax.css'
-    import swal from 'sweetalert'
+    import iziToast from 'izitoast'
+    import 'izitoast/dist/css/iziToast.min.css'
 
     Vue.use(Vuesax)
     const conn = new HubConnectionBuilder().withUrl("https://localhost:44379/kitchen/ordersHub").build();
@@ -59,17 +60,26 @@
         methods: {
             ...mapGetters(name, ['getDrinksOrdersList']),
             ...mapActions(name, ['setDrinksOrderList']),
+            readyToPickUp(order) {
+                axios.post(`order/setStatus`, { orderId: order.orderId, productType: order.productType })
+                    .then(() => {
+                        this.ordersList = this.ordersList.filter(orderElement => orderElement !== order);
+                    })
+            }
         },
         mounted() {
             conn.on("TakeDrinks", data => {
                 this.drinksOrderList = data;
             })
             conn.on("SendWaiter", data => {
-                swal({
-                    title: "Wezwano kelnera! ",
-                    text: 'Stolik ' + data + ' wzywa kelnera',
-                    icon: "warning",
-                }) 
+                iziToast.error({
+                    title: 'Wezwano kelnera!',
+                    message: 'Stolik ' + data + ' - wzywa kelnera',
+                    timeout: false,
+                    messageSize: '24',
+                    titleSize: '25',
+                    targetFirst: false
+                });
             })
         },
         created() {

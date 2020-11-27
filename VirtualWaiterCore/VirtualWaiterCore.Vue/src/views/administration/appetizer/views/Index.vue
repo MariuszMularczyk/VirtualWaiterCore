@@ -17,7 +17,7 @@
                 </tr>
             </thead>
             <tbody> 
-                <tr v-for="appetizer of getAppetizersList()" :key="`category-${appetizer.id}`">
+                <tr v-for="appetizer of getAppetizersList()" :key="`appetizer-${appetizer.id}`">
                     <td width="300px"><img width="300px" :src= "`data:image/png;base64,${appetizer.image}`"/></td>
                     <td class="name-column">{{ appetizer.name }}</td>
                     <td>{{ appetizer.description }}</td>
