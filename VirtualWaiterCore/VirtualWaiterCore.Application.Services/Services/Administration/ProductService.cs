@@ -8,6 +8,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
+using System.IO;
+using System.Drawing.Imaging;
 
 namespace VirtualWaiterCore.Application
 {
@@ -25,9 +28,29 @@ namespace VirtualWaiterCore.Application
                 Name = model.Name,
                 Price = model.Price,
                 TimeOfPreparation = model.TimeOfPreparation,
-                Image = Convert.FromBase64String(model.Image),
                 ProductType = productType
             };
+            try
+            {
+                var bytes = Convert.FromBase64String(model.Image);
+                var contents = new MemoryStream(bytes);
+                Image image = Image.FromStream(contents);
+                Image thumb = image.GetThumbnailImage(225, 150, () => false, IntPtr.Zero);
+                var ms = new MemoryStream();
+                thumb.Save(ms, ImageFormat.Png);
+                ms.Position = 0;
+                product.ImageTumb = ms.ToArray();
+
+                Image thumb2 = image.GetThumbnailImage(800, 470, () => false, IntPtr.Zero);
+                var ms2 = new MemoryStream();
+                thumb2.Save(ms2, ImageFormat.Png);
+                ms2.Position = 0;
+                product.Image = ms2.ToArray();
+            }
+            catch (Exception e)
+            {
+                product.Image = Convert.FromBase64String(model.Image);
+            }
             _productRepository.Add(product);
             _productRepository.Save();
         }
@@ -35,7 +58,10 @@ namespace VirtualWaiterCore.Application
         {
             return _productRepository.GetAll(productType);
         }
-
+        public virtual List<ProductListDTO> GetProductsToMenu(ProductType productType)
+        {
+            return _productRepository.GetAllToMenu(productType);
+        }
         public virtual ProductEditVM GetProduct(int id) {
 
             Product product = _productRepository.GetSingle(x => x.Id == id);
@@ -58,8 +84,28 @@ namespace VirtualWaiterCore.Application
             product.Description = model.Description;
             product.Price = model.Price;
             product.TimeOfPreparation = model.TimeOfPreparation;
-            product.Image = Convert.FromBase64String(model.Image);
 
+            try
+            {
+                var bytes = Convert.FromBase64String(model.Image);
+                var contents = new MemoryStream(bytes);
+                Image image = Image.FromStream(contents);
+                Image thumb = image.GetThumbnailImage(225, 150, () => false, IntPtr.Zero);
+                var ms = new MemoryStream();
+                thumb.Save(ms, ImageFormat.Png);
+                ms.Position = 0;
+                product.ImageTumb = ms.ToArray();
+
+                Image thumb2 = image.GetThumbnailImage(800, 470, () => false, IntPtr.Zero);
+                var ms2 = new MemoryStream();
+                thumb2.Save(ms2, ImageFormat.Png);
+                ms2.Position = 0;
+                product.Image = ms2.ToArray();
+            }
+            catch (Exception e)
+            {
+                product.Image = Convert.FromBase64String(model.Image);
+            }
             _productRepository.Edit(product);
             _productRepository.Save();
         }

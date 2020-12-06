@@ -36,6 +36,11 @@ namespace VirtualWaiterCore.WebAPI.Controllers
         {
             return _productService.GetProducts(ProductType.Dessert);
         }
+        [HttpGet("getDessertsToMenu")]
+        public List<ProductListDTO> GetProductsToMenu()
+        {
+            return _productService.GetProductsToMenu(ProductType.Dessert);
+        }
         [HttpGet("getDessert/{id}")]
         public ProductEditVM GetDessert(int id)
         {

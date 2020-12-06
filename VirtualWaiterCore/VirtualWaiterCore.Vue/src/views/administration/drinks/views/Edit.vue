@@ -49,7 +49,9 @@
                 this.setImage(file.base64);
             },
         },
-
+        mounted() {
+            this.setDrinkForm();
+        },
         components: {
             FileUploader
         },

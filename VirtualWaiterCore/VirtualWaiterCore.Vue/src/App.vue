@@ -1,5 +1,5 @@
 <template>
-    <div class="container app">
+    <div class="container app app1">
         <router-view />
     </div>
 </template>
@@ -12,6 +12,11 @@
   }
 </script>
 
-<style lang="sass">
-
+<style >
+    .app {
+        background-color: white;
+        height: 100%;
+        
+    }
+        
 </style>

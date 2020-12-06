@@ -5,45 +5,19 @@
                 Dodaj napój
             </router-link>
         </div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Obraz</th>
-                    <th scope="col" class="name-column">Nazwa</th>
-                    <th scope="col">Opis</th>
-                    <th scope="col">Cena</th>
-                    <th scope="col">Czas przygotowania</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="drink of getDrinksList()" :key="`category-${drink.id}`">
-                    <td width="300px"><img width="300px" :src= "`data:image/png;base64,${drink.image}`"/></td>
-                    <td class="name-column">{{ drink.name }}</td>
-                    <td>{{ drink.description }}</td>
-                    <td>{{ drink.price }}</td>
-                    <td>{{ drink.timeOfPreparation }}</td>
-                    <td class="buttons-column">
-                        <button class="btn btn-warning" @click.prevent="goToEdit(drink.id)">
-                            Edytuj
-                        </button>
-                        <button class="btn btn-danger" @click.prevent="deleteDrink(drink.id)">
-                            Usuń
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <item-list style=" margin-bottom: 20px" v-for="drink of getDrinksList()" :key="`drink-${drink.id}`" :item="drink" :category="'Napój'" @editItem="editItem" @deleteItem="deleteDrink"></item-list>
+
         <router-link :to="{name: 'administrationDashboard'}"><button type="default" class="btn btn-primary">Wróć</button></router-link>
     </div>
 </template>
 
 <script>
+    import ItemList from "@/components/ItemList"
 
     import { mapActions, mapGetters } from 'vuex';
     const name = "administrationStore/drinkStore/indexStore";
     const edit = "administrationStore/drinkStore/editStore";
-
+    import router from '@/router/index';
     export default {
         name: "DrinksList",
         data() {
@@ -56,10 +30,12 @@
             ...mapActions(name,['setDrinksList', 'deleteDrink']),
             ...mapGetters(name,['getDrinksList']),
             ...mapActions(edit,['setDrinkForm2',]),
-            goToEdit(id) {
-                this.setDrinkForm2(id).then(this.$router.push({name: 'administration.drink.edit', params: {id: id}}))
-                
+            editItem(e) {
+                router.push({ name: 'administration.drink.edit', params: { id: e } });
             }
+        },
+        components: {
+            ItemList
         },
         mounted() {
             this.setDrinksList();

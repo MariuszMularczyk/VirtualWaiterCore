@@ -16,6 +16,7 @@ namespace VirtualWaiterCore.Domain
         public decimal Price { get; set; }
         public decimal TimeOfPreparation { get; set; }
         public byte[] Image { get; set; }
+        public byte[] ImageTumb { get; set; }
         public ProductType ProductType { get; set; }
         public virtual List<ProductOrder> ProductOrders { get; set; }
 

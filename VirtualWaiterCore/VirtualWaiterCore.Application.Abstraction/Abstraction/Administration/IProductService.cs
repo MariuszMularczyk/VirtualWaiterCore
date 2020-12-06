@@ -15,6 +15,7 @@ namespace VirtualWaiterCore.Application
     {
         void Add(ProductAddVM model, ProductType productType);
         List<ProductListDTO> GetProducts(ProductType produtType);
+        List<ProductListDTO> GetProductsToMenu(ProductType produtType);
         ProductEditVM GetProduct(int id);
         void Edit(ProductEditVM model);
         void Delete(int id);

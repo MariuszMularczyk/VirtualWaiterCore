@@ -30,13 +30,17 @@ namespace VirtualWaiterCore.WebAPI.Controllers
                 _productService.Add(model, ProductType.MainCourse);
             }
         }
-
+        
         [HttpGet("getMainCourses")]
         public List<ProductListDTO> GetMainCourses()
         {
             return _productService.GetProducts(ProductType.MainCourse);
         }
-
+        [HttpGet("getMainCoursesToMenu")]
+        public List<ProductListDTO> GetMainCoursesToMenu()
+        {
+            return _productService.GetProductsToMenu(ProductType.MainCourse);
+        }
         [HttpGet("getMainCourse/{id}")]
         public ProductEditVM GetMainCourse(int id)
         {

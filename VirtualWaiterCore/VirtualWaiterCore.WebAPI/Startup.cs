@@ -86,6 +86,7 @@ namespace VirtualWaiterCore.WebAPI
 
 
             builder.RegisterType<OrderHub>().ExternallyOwned();
+            builder.RegisterType<WaiterHub>().ExternallyOwned();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -113,6 +114,7 @@ namespace VirtualWaiterCore.WebAPI
             {
                 endpoints.MapControllers();
                 endpoints.MapHub<OrderHub>("/kitchen/ordersHub");
+                endpoints.MapHub<WaiterHub>("/bar/waiterHub");
             });
         }
     }

@@ -11,7 +11,7 @@ export default new Router({
         component: () => import('@/views/Menu')
     },*/
     {
-        path: '/administrationDashboard',
+        path: '/administration',
         name: 'administrationDashboard',
         component: () => import('@/views/administration/administrationDashboard/AdministrationDashboard')
     },
@@ -99,6 +99,11 @@ export default new Router({
         path: '/bar',
         name: 'bar',
         component: () => import('@/views/order/bar/views/Index')
+    },
+    {
+        path: '/order/completeOrder',
+        name: 'order.completeOrder',
+        component: () => import('@/views/order/order/views/CompleteOrder')
     },
   ]
 });

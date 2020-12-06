@@ -30,7 +30,12 @@ namespace VirtualWaiterCore.WebAPI.Controllers
                 _productService.Add(model, ProductType.Drink);
             }
         }
-
+        
+        [HttpGet("getDrinksToMenu")]
+        public List<ProductListDTO> GetDrinksToMenu()
+        {
+            return _productService.GetProductsToMenu(ProductType.Drink);
+        }
         [HttpGet("getDrinks")]
         public List<ProductListDTO> GetDrinks()
         {

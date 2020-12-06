@@ -1,36 +1,7 @@
 ﻿<template>
 
     <div>
-        <div class="list-buttons">
-        </div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Stolik</th>
-                    <th scope="col" class="name-column">Zamówienie</th>
-                    <th scope="col">Sugerowana godzina rozpoczęcia</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="order of ordersList" :key="`order-${order.orderItemId}`">
-                    <td width="300px">{{order.table}}</td>
-                    <td class="name-column">
-                        {{order.order}}
-                    </td>
-                    <td>
-                        {{order.timeOfOrder}}
-                    </td>
-                    <td class="buttons-column">
-                        <button class="btn btn-warning" @click.prevent="readyToPickUp(order)">
-                            Wydano
-                        </button>
-
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <router-link :to="{name: 'administrationDashboard'}"><button type="default" class="btn btn-primary">Wróć</button></router-link>
+        <item-list style=" margin-bottom: 20px" v-for="order of ordersList" :key="`order-${order.orderItemId}`" :item="order" :category="order.productType" ></item-list>
     </div>
 
 </template>
@@ -39,6 +10,7 @@
     import { mapGetters, mapActions } from 'vuex';
     import { HubConnectionBuilder } from '@microsoft/signalr';
     import { mapFields } from 'vuex-map-fields';
+    import ItemList from "./ItemList";
     import axios from 'axios';
     const name = "ordersStore/kitchenStore/indexStore";
     import Vuesax from 'vuesax'
@@ -78,7 +50,7 @@
             this.setOrdersList();
         },
         components: {
-
+            ItemList
         },
     }
 </script>

@@ -11,6 +11,7 @@
     "@microsoft/signalr": "^5.0.0",
     "aheenam-vue-dashboard": "^0.1.9",
     "axios": "^0.19.2",
+    "bootstrap": "^4.5.3",
     "core-js": "^3.6.4",
     "izitoast": "^1.4.0",
     "lodash": "^4.17.15",

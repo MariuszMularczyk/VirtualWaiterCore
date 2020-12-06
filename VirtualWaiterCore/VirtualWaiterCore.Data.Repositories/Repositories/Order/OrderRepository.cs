@@ -43,7 +43,7 @@ namespace VirtualWaiterCore.Data
 
                     if (productsAppetizers.Any())
                     {
-                        StringBuilder stringAppetizers = new StringBuilder("Przystawki: \n");
+                        StringBuilder stringAppetizers = new StringBuilder("");
                         foreach (ProductItemDTO product in productsAppetizers)
                         {
                             stringAppetizers.Append(product.Quantity);
@@ -55,6 +55,7 @@ namespace VirtualWaiterCore.Data
                         {
                             OrderItemId = OrderItemId++,
                             OrderId = item.OrderId,
+                            ProductTypeName = "Przystawki",
                             Table = item.Table,
                             Order = stringAppetizers.ToString(),
                             TimeOfOrder = item.TimeOfOrder,
@@ -77,7 +78,7 @@ namespace VirtualWaiterCore.Data
 
                     if (productsMainCourses.Any())
                     {
-                        StringBuilder stringMainCourses = new StringBuilder("Dania g³ówne: \n");
+                        StringBuilder stringMainCourses = new StringBuilder("");
                         foreach (ProductItemDTO product in productsMainCourses)
                         {
                             stringMainCourses.Append(product.Quantity);
@@ -89,6 +90,7 @@ namespace VirtualWaiterCore.Data
                         {
                             OrderItemId = OrderItemId++,
                             OrderId = item.OrderId,
+                            ProductTypeName = "Dania g³ówne",
                             Table = item.Table,
                             Order = stringMainCourses.ToString(),
                             TimeOfOrder = item.TimeOfOrder,
@@ -111,7 +113,7 @@ namespace VirtualWaiterCore.Data
 
                     if (productsDeserts.Any())
                     {
-                        StringBuilder stringDeserts = new StringBuilder("Desery: \n");
+                        StringBuilder stringDeserts = new StringBuilder("");
                         foreach (ProductItemDTO product in productsDeserts)
                         {
                             stringDeserts.Append(product.Quantity);
@@ -123,6 +125,7 @@ namespace VirtualWaiterCore.Data
                         {
                             OrderItemId = OrderItemId++,
                             OrderId = item.OrderId,
+                            ProductTypeName = "Desery",
                             Table = item.Table,
                             Order = stringDeserts.ToString(),
                             TimeOfOrder = item.TimeOfOrder,
@@ -164,7 +167,7 @@ namespace VirtualWaiterCore.Data
 
                     if (drinks.Any())
                     {
-                        StringBuilder stringDrinks = new StringBuilder("Napoje: \n");
+                        StringBuilder stringDrinks = new StringBuilder("");
                         foreach (ProductItemDTO product in drinks)
                         {
                             stringDrinks.Append(product.Quantity);

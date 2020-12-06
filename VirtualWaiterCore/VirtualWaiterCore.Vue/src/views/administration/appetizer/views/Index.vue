@@ -5,44 +5,16 @@
                 Dodaj przystawkę
             </router-link>
         </div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Obraz</th>
-                    <th scope="col" class="name-column">Nazwa</th>
-                    <th scope="col">Opis</th>
-                    <th scope="col">Cena</th>
-                    <th scope="col">Czas przygotowania</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody> 
-                <tr v-for="appetizer of getAppetizersList()" :key="`appetizer-${appetizer.id}`">
-                    <td width="300px"><img width="300px" :src= "`data:image/png;base64,${appetizer.image}`"/></td>
-                    <td class="name-column">{{ appetizer.name }}</td>
-                    <td>{{ appetizer.description }}</td>
-                    <td>{{ appetizer.price }}</td>
-                    <td>{{ appetizer.timeOfPreparation }}</td>
-                    <td class="buttons-column">
-                        <router-link :to="{name: 'administration.appetizer.edit', params: {id: appetizer.id}}" class="btn btn-warning">
-                            Edytuj
-                        </router-link>
-                        <button class="btn btn-danger" @click.prevent="deleteAppetizer(appetizer.id)">
-                            Usuń
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <item-list style=" margin-bottom: 20px" v-for="appetizer of getAppetizersList()" :key="`appetizer-${appetizer.id}`" :item="appetizer" :category="'Przystawka'" @editItem="editItem" @deleteItem="deleteAppetizer"></item-list>
         <router-link :to="{name: 'administrationDashboard'}"><button type="default" class="btn btn-primary">Wróć</button></router-link>
     </div>
 </template>
 
 <script>
-
+    import router from '@/router/index';
     import { mapActions, mapGetters } from 'vuex';
     const name = "administrationStore/appetizerStore/indexStore";
-
+    import ItemList from "@/components/ItemList"
 
     export default {
         name: "AppetizersList",
@@ -54,11 +26,17 @@
         },
         methods: {
             ...mapActions(name,['setAppetizersList', 'deleteAppetizer']),
-            ...mapGetters(name,['getAppetizersList'])
+            ...mapGetters(name, ['getAppetizersList']),
+            editItem(e) {
+                router.push({ name: 'administration.appetizer.edit', params: { id: e } });
+            }
         },
         mounted() {
             this.setAppetizersList();
         },
+        components: {
+            ItemList
+        }
     }
 </script>
 

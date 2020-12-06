@@ -10,6 +10,7 @@ namespace VirtualWaiterCore.Data
 {
     public interface IProductRepository : IRepository<Product>
     {
-        List<ProductListDTO> GetAll(ProductType producType);
+        List<ProductListDTO> GetAll(ProductType producType); 
+        List<ProductListDTO> GetAllToMenu(ProductType producType); 
     }
 }

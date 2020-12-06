@@ -5,27 +5,28 @@
         </div>
 
         <div class="cart__wrapper">
+            <h1 style="text-align:center">Twoje zamówienie</h1>
             <div v-if="!!cartItemsArray.length" class="cart__products-list">
                 <cart-item v-for="(cartItem, index) of cartItemsArray" :key="`cart-item-${index}`" :cart-item="cartItem" />
             </div>
 
             <div class="cart__details">
-                Wartość twojego zamówienia: <strong>{{cartTotal}} zł</strong>
+                Wartość twojego zamówienia: <strong>{{cartTotal}} zł</strong><br />
+                <div class="cart__buttons">
+                    <vs-button style="font-size: 1.2rem; width: 130px;" color="rgb(59,222,200)" gradient @click.prevent="popupActivo=true" :disabled="!cartItemsArray.length">
+                        Zamów
+                    </vs-button>
+                    <vs-button style="font-size: 1.2rem; width: 130px;" color="rgb(220, 53, 69)" gradient @click.prevent="popupActivo2=true" :disabled="!cartItemsArray.length">
+                        Anuluj
+                    </vs-button>
+                    <vs-button style="font-size: 1.2rem; width: 130px;" gradient @click.prevent="goToMenu()">
+                        Wróć
+                    </vs-button>
+                </div>
+                <br />
             </div>
 
-            <div class="cart__buttons">
-                <button class="btn button" @click.prevent="goToMenu()">
-                    Wróć
-                </button>
-
-                <button class="btn button--red" @click.prevent="popupActivo2=true">
-                    Anuluj
-                </button>
-
-                <button :disabled="!cartItemsArray.length" class="btn button" @click.prevent="popupActivo=true">
-                    Zamów
-                </button>
-            </div>
+           
         </div>
         <div class="center">
 
@@ -39,10 +40,10 @@
                 <template #footer>
                     <div class="con-footer">
                         <vs-button @click="acceptOrder()" transparent>
-                            Tak
+                            <h5>Tak</h5>
                         </vs-button>
                         <vs-button @click="cancel()" dark transparent>
-                            Nie
+                            <h5>Nie</h5>
                         </vs-button>
                     </div>
                 </template>
@@ -57,10 +58,10 @@
                 <template #footer>
                     <div class="con-footer">
                         <vs-button @click="cancelTheOrder()" transparent>
-                            Tak
+                            <h5>Tak</h5>
                         </vs-button>
-                        <vs-button @click="cancel2()" dark transparent>
-                            Nie
+                        <vs-button @click="cancel2()" dark transparent >
+                            <h5>Nie</h5>
                         </vs-button>
                     </div>
                 </template>
@@ -105,7 +106,7 @@
                 this.popupActivo = false;
                 this.popupActivo2 = false;
                 this.addOrder()
-                //this.redirectInterval = setInterval(() => this.$router.push({ name: 'order.menu' }), 100);
+                this.redirectInterval = setInterval(() => this.$router.push({ name: 'order.completeOrder' }), 100);
             },
             cancel() {
                 this.popupActivo = false;
@@ -139,17 +140,19 @@
             text-align: right
             padding: 50px 0
             font-size: 1.3rem
-            color: #01673d
+            color: black
 
         &__products-list
-            background: #01673d
+            background: #b1b6ba
             color: #c2454b
             padding: 20px
-            border-radius: 5px
+            
 
         &__buttons
             text-align: center
-            button
+            display: flex;
+            float: right
+            vs-button
                 margin-left: 10px
                 &:first-child
                     margin-left: 0

@@ -1,31 +1,7 @@
 ﻿<template>
 
     <div>
-        <div class="list-buttons">
-        </div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Stolik</th>
-                    <th scope="col" class="name-column">Zamówienie</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="drink of drinksOrderList" :key="`drink-${drink.orderItemId}`">
-                    <td width="300px">{{drink.table}}</td>
-                    <td class="name-column">
-                        {{drink.order}}
-                    </td>
-                    <td class="buttons-column">
-                        <button class="btn btn-warning" @click.prevent="readyToPickUp(order)">
-                            Wydano
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <router-link :to="{name: 'administrationDashboard'}"><button type="default" class="btn btn-primary">Wróć</button></router-link>
+        <item-list style=" margin-bottom: 20px" v-for="drink of drinksOrderList" :key="`drink-${drink.orderItemId}`" :item="drink"></item-list>
     </div>
 
 </template>
@@ -41,10 +17,13 @@
     import 'vuesax/dist/vuesax.css'
     import iziToast from 'izitoast'
     import 'izitoast/dist/css/iziToast.min.css'
+    import ItemList from "./ItemList";
 
     Vue.use(Vuesax)
     const conn = new HubConnectionBuilder().withUrl("https://localhost:44379/kitchen/ordersHub").build();
     conn.start();
+    const conn2 = new HubConnectionBuilder().withUrl("https://localhost:44379/bar/waiterHub").build();
+    conn2.start();
 
     export default {
         name: "DrinkList",
@@ -71,7 +50,7 @@
             conn.on("TakeDrinks", data => {
                 this.drinksOrderList = data;
             })
-            conn.on("SendWaiter", data => {
+            conn2.on("SendWaiter", data => {
                 iziToast.error({
                     title: 'Wezwano kelnera!',
                     message: 'Stolik ' + data + ' - wzywa kelnera',
@@ -86,7 +65,7 @@
             this.setDrinksOrderList();
         },
         components: {
-
+            ItemList
         },
     }
 </script>

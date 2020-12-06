@@ -94,19 +94,19 @@ const mutations = {
 
 const actions = {
     setAppetizersList({commit}) {
-        axios.get('/appetizer/getAppetizers')
+        axios.get('/appetizer/getAppetizersToMenu')
             .then(({ data }) => commit('setAppetizersList', data));
     },
     setDessertsList({ commit }) {
-        axios.get('/dessert/getDesserts')
+        axios.get('/dessert/getDessertsToMenu')
             .then(({ data }) => commit('setDessertsList', data));
     },
     setDrinksList({ commit }) {
-        axios.get('/drink/getDrinks')
+        axios.get('/drink/getDrinksToMenu')
             .then(({ data }) => commit('setDrinksList', data));
     },
     setMainCoursesList({ commit }) {
-        axios.get('/mainCourse/getMainCourses')
+        axios.get('/mainCourse/getMainCoursesToMenu')
             .then(({ data }) => commit('setMainCoursesList', data));
     },
     addToCart({ commit }, product) {

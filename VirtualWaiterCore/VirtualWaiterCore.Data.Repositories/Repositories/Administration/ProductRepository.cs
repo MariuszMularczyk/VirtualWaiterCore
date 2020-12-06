@@ -23,6 +23,19 @@ namespace VirtualWaiterCore.Data
                 Description = x.Description,
                 Price = x.Price,
                 TimeOfPreparation = x.TimeOfPreparation,
+                Image = Convert.ToBase64String(x.ImageTumb),
+                ProductType = x.ProductType
+            }).Where(x => x.ProductType == productType).ToList();
+        }
+        public virtual List<ProductListDTO> GetAllToMenu(ProductType productType)
+        {
+            return Context.Products.Select(x => new ProductListDTO()
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Description = x.Description,
+                Price = x.Price,
+                TimeOfPreparation = x.TimeOfPreparation,
                 Image = Convert.ToBase64String(x.Image),
                 ProductType = x.ProductType
             }).Where(x => x.ProductType == productType).ToList();

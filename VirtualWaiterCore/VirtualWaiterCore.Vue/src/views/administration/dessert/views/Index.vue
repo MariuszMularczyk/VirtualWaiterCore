@@ -5,43 +5,16 @@
                 Dodaj deser
             </router-link>
         </div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Obraz</th>
-                    <th scope="col" class="name-column">Nazwa</th>
-                    <th scope="col">Opis</th>
-                    <th scope="col">Cena</th>
-                    <th scope="col">Czas przygotowania</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="dessert of getDessertsList()" :key="`category-${dessert.id}`">
-                    <td width="300px"><img width="300px" :src= "`data:image/png;base64,${dessert.image}`"/></td>
-                    <td class="name-column">{{ dessert.name }}</td>
-                    <td>{{ dessert.description }}</td>
-                    <td>{{ dessert.price }}</td>
-                    <td>{{ dessert.timeOfPreparation }}</td>
-                    <td class="buttons-column">
-                        <router-link :to="{name: 'administration.dessert.edit', params: {id: dessert.id}}" class="btn btn-warning">
-                            Edytuj
-                        </router-link>
-                        <button class="btn btn-danger" @click.prevent="deleteDessert(dessert.id)">
-                            Usuń
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <item-list style=" margin-bottom: 20px" v-for="dessert of getDessertsList()" :key="`dessert-${dessert.id}`" :item="dessert" :category="'Deser'" @editItem="editItem" @deleteItem="deleteDessert"></item-list>
         <router-link :to="{name: 'administrationDashboard'}"><button type="default" class="btn btn-primary">Wróć</button></router-link>
     </div>
 </template>
 
 <script>
-
+    import router from '@/router/index';
     import { mapActions, mapGetters } from 'vuex';
     const name = "administrationStore/dessertStore/indexStore";
+    import ItemList from "@/components/ItemList"
 
 
     export default {
@@ -54,11 +27,17 @@
         },
         methods: {
             ...mapActions(name,['setDessertsList', 'deleteDessert']),
-            ...mapGetters(name,['getDessertsList'])
+            ...mapGetters(name, ['getDessertsList']),
+            editItem(e) {
+                router.push({ name: 'administration.dessert.edit', params: { id: e } });
+            }
         },
         mounted() {
             this.setDessertsList();
         },
+        components: {
+            ItemList
+        }
     }
 </script>
 
