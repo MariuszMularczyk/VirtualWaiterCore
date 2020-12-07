@@ -7,16 +7,16 @@
                 <template #left>
                     <img width="100px" height="100px" src="@/assets/images/logo.png" alt="">
                 </template>
-                <vs-navbar-item style="font-size: 1.85rem;" :active="active == 'Appetizers'" id="Appetizers">
+                <vs-navbar-item style="font-size: 1.85rem;" @click="forceRerender()" :active="active == 'Appetizers'" id="Appetizers">
                     Przystawki
                 </vs-navbar-item>
-                <vs-navbar-item style="font-size: 1.85rem;" :active="active == 'MainCourses'" id="MainCourses">
+                <vs-navbar-item style="font-size: 1.85rem;" @click="forceRerender()" :active="active == 'MainCourses'" id="MainCourses">
                     Dania główne
                 </vs-navbar-item>
-                <vs-navbar-item style="font-size: 1.85rem;" :active="active == 'Desserts'" id="Desserts">
+                <vs-navbar-item style="font-size: 1.85rem;" @click="forceRerender()"  :active="active == 'Desserts'" id="Desserts">
                     Desery
                 </vs-navbar-item>
-                <vs-navbar-item style="font-size: 1.85rem;" :active="active == 'Drinks'" id="Drinks">
+                <vs-navbar-item style="font-size: 1.85rem;" @click="forceRerender()" :active="active == 'Drinks'" id="Drinks">
                     Drinki
                 </vs-navbar-item>
                 <template #right>
@@ -43,12 +43,12 @@
 
         <div style="margin-top: 15% ;">
             <carousel-3d :controls-visible="true" :controls-prev-html="'&#10092; '" :controls-next-html="'&#10093;'"
-                         :controls-width="30" :controls-height="60" :clickable="false" width="800" height="470">
+                         :controls-width="30" :controls-height="60" :clickable="false" width="800" height="470" :key="componentKey">
                 <slide v-for="(item, i) in getMenu()" :index="i" v-bind:key="i">
                     <figure>
                         <img width="800" height="470" :src="`data:image/png;base64,${item.image}`">
                         <figcaption>
-                            <div style="float: left;">
+                            <div style="float: left; width: 80%;">
                                 <h3>{{item.name}}</h3>
                                 <div style="font-size: large;">
                                     {{item.description}}<br />
@@ -94,7 +94,8 @@
         data() {
             return {
                 menu: null,
-                active: 'Appetizers'
+                active: 'Appetizers',
+                componentKey: 0,
             }
         },
         computed: {
@@ -118,6 +119,9 @@
                         return null;
                 }
             },
+            forceRerender() {
+                this.componentKey += 1;
+            },
             goToCart() {
                 this.$router.push({ name: 'order.cart' })
             },
@@ -135,7 +139,7 @@
     }
 </script>
 
-<style scoped>
+<style >
     .carousel-3d-container figure {
       margin:0;
     }
@@ -157,8 +161,6 @@
     .prev {
         color: white !important
     }
-    .app1 {
-        background-color: rgba(0,0,0,0.0) !important;
-    }
+   
 
 </style>

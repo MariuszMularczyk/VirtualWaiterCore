@@ -1,6 +1,6 @@
 <template>
     <div>
-        <dashboard :rows="4" :columns="4">
+        <dashboard :rows="3" :columns="4">
             <tile :x="1" :y="1" :w="4" :h="1">
                 Dostosuj menu
                 <br>

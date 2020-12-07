@@ -1,5 +1,7 @@
 <template>
     <div>
+        <br />
+        <h1 style="text-align:center">Dania główne</h1>
         <div class="list-buttons">
             <router-link :to="{name: 'administration.mainCourse.add'}" class="btn btn-primary">
                 Dodaj danie główne
@@ -9,6 +11,7 @@
         <item-list style=" margin-bottom: 20px" v-for="mainCourse of getMainCoursesList()" :key="`drink-${mainCourse.id}`" :item="mainCourse" :category="'Danie główne'" @editItem="editItem" @deleteItem="deleteMainCourse"></item-list>
 
         <router-link :to="{name: 'administrationDashboard'}"><button type="default" class="btn btn-primary">Wróć</button></router-link>
+        <br /><br />
     </div>
 </template>
 
@@ -46,7 +49,7 @@
 <style scoped lang="sass">
     .list-buttons
         margin-bottom: 20px
-
+        margin-left: 85%;
         .name-column
             width: 100px
 

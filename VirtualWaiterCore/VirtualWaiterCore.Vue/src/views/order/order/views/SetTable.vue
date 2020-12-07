@@ -1,11 +1,13 @@
 <template>
 
     <div id="example" width="1500">
+        <br />
         <div class="form-group">
             <label for="table" class="control-label">Ustaw stolik</label>
             <textarea v-model="Table" id="table" class="form-control"></textarea>
         </div>
         <router-link :to="{name: 'order.menu'}"><button type="default" class="btn btn-primary">Dalej</button></router-link>
+        <br /><br />
     </div>
 
 </template>

@@ -1,15 +1,15 @@
 ﻿<template>
     <div class="cart">
-        <div v-if="!cartItemsArray.length">
-            Brak produktów
-        </div>
+
 
         <div class="cart__wrapper">
             <h1 style="text-align:center">Twoje zamówienie</h1>
             <div v-if="!!cartItemsArray.length" class="cart__products-list">
                 <cart-item v-for="(cartItem, index) of cartItemsArray" :key="`cart-item-${index}`" :cart-item="cartItem" />
             </div>
-
+            <div v-if="!cartItemsArray.length">
+                <h2 style="text-align:center">Brak produktów</h2>
+            </div>
             <div class="cart__details">
                 Wartość twojego zamówienia: <strong>{{cartTotal}} zł</strong><br />
                 <div class="cart__buttons">
@@ -26,7 +26,7 @@
                 <br />
             </div>
 
-           
+
         </div>
         <div class="center">
 

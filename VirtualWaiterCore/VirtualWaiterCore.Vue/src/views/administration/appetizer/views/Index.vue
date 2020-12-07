@@ -1,5 +1,7 @@
 <template>
     <div>
+        <br />
+        <h1 style="text-align:center">Przystawki</h1>
         <div class="list-buttons">
             <router-link :to="{name: 'administration.appetizer.add'}" class="btn btn-primary">
                 Dodaj przystawkę
@@ -7,6 +9,8 @@
         </div>
         <item-list style=" margin-bottom: 20px" v-for="appetizer of getAppetizersList()" :key="`appetizer-${appetizer.id}`" :item="appetizer" :category="'Przystawka'" @editItem="editItem" @deleteItem="deleteAppetizer"></item-list>
         <router-link :to="{name: 'administrationDashboard'}"><button type="default" class="btn btn-primary">Wróć</button></router-link>
+        <br />
+        <br />
     </div>
 </template>
 
@@ -43,7 +47,7 @@
 <style scoped lang="sass">
     .list-buttons
         margin-bottom: 20px
-
+        margin-left: 85%;
         .name-column
             width: 100px
 

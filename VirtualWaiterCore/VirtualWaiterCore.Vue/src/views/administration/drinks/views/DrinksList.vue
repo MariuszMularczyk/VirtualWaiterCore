@@ -1,5 +1,7 @@
 ﻿<template>
     <div>
+        <br />
+        <h1 style="text-align:center">Napoje</h1>
         <div class="list-buttons">
             <router-link :to="{name: 'administration.drink.add'}" class="btn btn-primary">
                 Dodaj napój
@@ -8,6 +10,8 @@
         <item-list style=" margin-bottom: 20px" v-for="drink of getDrinksList()" :key="`drink-${drink.id}`" :item="drink" :category="'Napój'" @editItem="editItem" @deleteItem="deleteDrink"></item-list>
 
         <router-link :to="{name: 'administrationDashboard'}"><button type="default" class="btn btn-primary">Wróć</button></router-link>
+        <br />
+        <br />
     </div>
 </template>
 
@@ -46,7 +50,7 @@
 <style scoped lang="sass">
     .list-buttons
         margin-bottom: 20px
-
+        margin-left: 85%;
         .name-column
             width: 100px
 
