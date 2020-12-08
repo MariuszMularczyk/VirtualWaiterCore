@@ -6,7 +6,7 @@
         <div class="article-details">
             <h3 class="post-title">
                 {{ item.productTypeName }}
-                <span @click.prevent="readyToPickUp(order)" class="btn-span">
+                <span @click.prevent="done(item)" class="btn-span">
                     <img class="buttons" src="@/assets/images/done.png">
                 </span>
             </h3>
@@ -17,7 +17,6 @@
 </template>
 
 <script>
-
     export default {
         name: "ItemList",
         props: ['item'],
@@ -28,6 +27,9 @@
         computed: {
         },
         methods: {
+            done(item) {
+                this.$emit('done', item)
+            },
         },
         mounted() {
 

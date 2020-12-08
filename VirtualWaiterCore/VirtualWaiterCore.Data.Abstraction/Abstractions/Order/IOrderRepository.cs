@@ -10,6 +10,7 @@ namespace VirtualWaiterCore.Data
     public interface IOrderRepository : IRepository<Order>
     {
         List<OrderListDTO> GetOrders();
+        List<int> GetOrdersIds();
         List<OrderListDTO> GetDrinks();
     }
 }

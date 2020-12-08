@@ -183,13 +183,20 @@ namespace VirtualWaiterCore.Data
                             Order = stringDrinks.ToString(),
                             TimeOfOrder = item.TimeOfOrder,
                             TimeOfPreparation = drinks.Max(x => x.TimeOfPreparation),
-                            ProductType = Dictionaries.ProductType.Appetizer,
+                            ProductType = Dictionaries.ProductType.Drink,
                         };
                         orders.Add(appetizers);
                     }
                 }
             }
-            return orders;
+            return orders.OrderBy(x => x.TimeOfOrder).ToList();
         }
+
+        public virtual List<int> GetOrdersIds()
+        {
+            List<int>  ids = Context.Orders.Where(x => x.OrderStatus != Dictionaries.OrderStatusEnum.Done).Select(x => x.Id).ToList();
+            return ids;
+        }
+
     }
 }

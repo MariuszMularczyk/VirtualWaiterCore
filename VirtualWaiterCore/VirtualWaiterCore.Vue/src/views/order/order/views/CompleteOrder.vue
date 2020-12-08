@@ -4,13 +4,16 @@
         <h1>Twoje zamówienie jest właśnie przygotowywane</h1>
         <img class="imgsize" src="@/assets/images/preparingOrder.gif">
         <h1>Zapomiałeś czegoś?</h1>
-        <router-link :to="{name: 'order.menu'}"><h1 style="text-decoration: underline;">Wroć do menu</h1></router-link>
+
+       <h1 style="text-decoration: underline; cursor: pointer;" @click.prevent="returnToMenu()">Wroć do menu</h1>
     </div>
 
 </template>
 
 <script>
+    import { mapActions } from "vuex";
 
+    const name = "ordersStore/orderStore/indexStore";
     export default {
         name: "CompleteOrder",
         data() {
@@ -20,6 +23,11 @@
         computed: {
         },
         methods: {
+            ...mapActions(name, ['cancelOrder']),
+            returnToMenu() {
+                this.cancelOrder()
+                this.$router.push({ name: 'order.menu' });
+            },
         },
         mounted() {
 

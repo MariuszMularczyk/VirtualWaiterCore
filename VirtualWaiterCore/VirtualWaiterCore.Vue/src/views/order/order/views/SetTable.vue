@@ -1,10 +1,10 @@
 <template>
 
-    <div id="example" width="1500">
+    <div id="example" width="1500" style="text-align:center;">
         <br />
         <div class="form-group">
-            <label for="table" class="control-label">Ustaw stolik</label>
-            <textarea v-model="Table" id="table" class="form-control"></textarea>
+            <h3 >Ustaw stolik</h3>
+            <input style="width:50%; margin-left:25%;" v-model="Table" id="table" class="form-control">
         </div>
         <router-link :to="{name: 'order.menu'}"><button type="default" class="btn btn-primary">Dalej</button></router-link>
         <br /><br />

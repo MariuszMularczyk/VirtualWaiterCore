@@ -50,7 +50,63 @@ namespace VirtualWaiterCore.Application
 
         public virtual List<OrderListDTO> GetOrders()
         {
-            return _orderRepository.GetOrders();
+            List<OrderListDTO> orders = _orderRepository.GetOrders();
+            List<int> orderIds = _orderRepository.GetOrdersIds();
+
+            List<OrderListDTO> newOrders = new List<OrderListDTO>();
+
+
+            foreach (int orderId in orderIds) {
+
+                OrderListDTO appetizers1 = orders.FirstOrDefault(x => x.OrderId == orderId && x.ProductType == ProductType.Drink);
+
+                OrderListDTO appetizers = orders.FirstOrDefault(x => x.OrderId == orderId && x.ProductType == ProductType.Appetizer);
+                OrderListDTO mainCourses = orders.FirstOrDefault(x => x.OrderId == orderId && x.ProductType == ProductType.MainCourse);
+                OrderListDTO desserts = orders.FirstOrDefault(x => x.OrderId == orderId && x.ProductType == ProductType.Dessert);
+                if(appetizers != null)
+                {
+                    appetizers.TimeOfSugestedPrepare = appetizers.TimeOfOrder.AddMinutes(15-(double)appetizers.TimeOfPreparation);
+                    newOrders.Add(appetizers);
+                }
+
+                if (mainCourses != null && appetizers != null)
+                {
+                    DateTime appetizerTimeOfDone = (DateTime)appetizers.TimeOfSugestedPrepare;
+                    mainCourses.TimeOfSugestedPrepare = appetizerTimeOfDone.AddMinutes(15 - (double)mainCourses.TimeOfPreparation);
+                    newOrders.Add(mainCourses);
+                }
+                else if (mainCourses != null && appetizers == null)
+                {
+                    mainCourses.TimeOfSugestedPrepare = mainCourses.TimeOfOrder.AddMinutes(15 - (double)mainCourses.TimeOfPreparation);
+                    newOrders.Add(mainCourses);
+                }
+
+                if (mainCourses != null && appetizers != null && desserts != null)
+                {
+                    DateTime mainCoursesTimeOfDone = (DateTime)mainCourses.TimeOfSugestedPrepare;
+                    desserts.TimeOfSugestedPrepare = mainCoursesTimeOfDone.AddMinutes(15 - (double)desserts.TimeOfPreparation);
+                    newOrders.Add(desserts);
+                }
+                else if (mainCourses != null && appetizers == null && desserts != null)
+                {
+                    DateTime mainCoursesTimeOfDone = (DateTime)mainCourses.TimeOfSugestedPrepare;
+                    desserts.TimeOfSugestedPrepare = mainCoursesTimeOfDone.AddMinutes(15 - (double)desserts.TimeOfPreparation);
+                    newOrders.Add(desserts);
+                }
+                else if (mainCourses == null && appetizers != null && desserts != null)
+                {
+                    DateTime appetizerTimeOfDone = (DateTime)appetizers.TimeOfSugestedPrepare;
+                    desserts.TimeOfSugestedPrepare = appetizerTimeOfDone.AddMinutes(15 - (double)desserts.TimeOfPreparation);
+                    newOrders.Add(desserts);
+                }
+                else if (mainCourses == null && appetizers == null && desserts != null)
+                {
+                    desserts.TimeOfSugestedPrepare = desserts.TimeOfOrder.AddMinutes(15 - (double)desserts.TimeOfPreparation);
+                    newOrders.Add(desserts);
+                }
+            }
+
+            return newOrders.OrderBy(x => x.TimeOfSugestedPrepare).ToList();
         }
         public virtual List<OrderListDTO> GetDrinks()
         {
