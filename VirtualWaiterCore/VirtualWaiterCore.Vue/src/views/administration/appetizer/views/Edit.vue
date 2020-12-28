@@ -1,8 +1,10 @@
 <template>
     <form role="form" @submit.prevent="editAppetizer">
+        <br />
+        <h6>Administracja > Lista przystawek > Edytuj przystawkę</h6>
         <div class="form-group" width="500px" height="300px">
             <label for="image">Obraz</label>
-            <file-uploader id="image"  @change="onChangeImage" ></file-uploader>
+            <file-uploader id="image" @change="onChangeImage"></file-uploader>
         </div>
 
         <div class="form-group">
@@ -24,6 +26,8 @@
         </div>
         <button type="submit" class="btn btn-primary">Zapisz</button>
         <router-link :to="{name: 'administration.appetizersList'}"><button type="default" class="btn btn-primary" style="margin-left: 20px;">Wróć</button></router-link>
+        <br />
+        <br />
     </form>
 </template>
 

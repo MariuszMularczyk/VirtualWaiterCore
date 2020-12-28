@@ -47,7 +47,7 @@ const mutations = {
 
 const actions = {
     editDessert({ state }, ) {
-        axios.post('/drink/edit', state.Dessert).then(() => router.push({ name: 'administration.drinksList' }));
+        axios.post('/drink/edit', state.Dessert).then(() => router.push({ name: 'administration.dessertsList' }));
     },
     setDessertForm({ commit }) {
         axios.get('/dessert/getDessert/' + router.currentRoute.params.id).then(({ data }) => commit('setForm', data));

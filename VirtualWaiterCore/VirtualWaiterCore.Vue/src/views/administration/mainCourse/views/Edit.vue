@@ -1,5 +1,6 @@
 <template>
     <form role="form" @submit.prevent="editMainCourse">
+        <br />
         <div class="form-group" width="500px" height="300px">
             <label for="image">Obraz</label>
             <file-uploader id="image" @change="onChangeImage"></file-uploader>
@@ -24,6 +25,8 @@
         </div>
         <button type="submit" class="btn btn-primary">Zapisz</button>
         <router-link :to="{name: 'administration.mainCoursesList'}"><button type="default" class="btn btn-primary" style="margin-left: 20px;">Wróć</button></router-link>
+        <br />
+        <br />
     </form>
 </template>
 

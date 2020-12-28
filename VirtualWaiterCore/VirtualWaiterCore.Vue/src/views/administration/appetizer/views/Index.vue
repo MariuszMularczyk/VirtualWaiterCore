@@ -1,6 +1,8 @@
 <template>
     <div>
         <br />
+        <strong>Administracja > Lista przystawek</strong>
+        <br />
         <h1 style="text-align:center">Przystawki</h1>
         <div class="list-buttons">
             <router-link :to="{name: 'administration.appetizer.add'}" class="btn btn-primary">
