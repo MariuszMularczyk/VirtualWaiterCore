@@ -47,7 +47,7 @@ namespace VirtualWaiterCore.WebAPI
             services.AddDbContext<MainDatabaseContext>(o => o.UseSqlServer(Configuration.GetConnectionString("MainDatabaseContext")));
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
-                builder.WithOrigins("http://localhost:8081")
+                builder.WithOrigins("http://localhost:8081", "http://192.168.0.66:8081")
                        .AllowAnyMethod()
                        .AllowAnyHeader()
                        .AllowCredentials();

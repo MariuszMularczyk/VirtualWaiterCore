@@ -19,6 +19,7 @@ namespace VirtualWaiterCore.Data
         public DateTime TimeOfOrder { get; set; }
         public DateTime? TimeOfSugestedPrepare { get; set; }
         public decimal TimeOfPreparation { get; set; }
+        public List<decimal> TimeOfPreparations { get; set; }
         public string Order { get; set; }
         public ProductType ProductType { get; set; }
     }

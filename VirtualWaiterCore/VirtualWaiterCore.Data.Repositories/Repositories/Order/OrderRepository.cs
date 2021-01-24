@@ -43,13 +43,16 @@ namespace VirtualWaiterCore.Data
 
                     if (productsAppetizers.Any())
                     {
+                        productsAppetizers.OrderByDescending(x => x.TimeOfPreparation);
                         StringBuilder stringAppetizers = new StringBuilder("");
+                        List<decimal> appetizersTimes = new List<decimal>();
                         foreach (ProductItemDTO product in productsAppetizers)
                         {
                             stringAppetizers.Append(product.Quantity);
                             stringAppetizers.Append(" x ");
                             stringAppetizers.Append(product.ProductName);
                             stringAppetizers.Append(", \n");
+                            appetizersTimes.Add(product.TimeOfPreparation);
                         }
                         OrderListDTO appetizers = new OrderListDTO()
                         {
@@ -60,6 +63,7 @@ namespace VirtualWaiterCore.Data
                             Order = stringAppetizers.ToString(),
                             TimeOfOrder = item.TimeOfOrder,
                             TimeOfPreparation = productsAppetizers.Max(x => x.TimeOfPreparation),
+                            TimeOfPreparations = appetizersTimes,
                             ProductType = Dictionaries.ProductType.Appetizer,
                         };
                         orders.Add(appetizers);
@@ -78,13 +82,16 @@ namespace VirtualWaiterCore.Data
 
                     if (productsMainCourses.Any())
                     {
+                        productsMainCourses.OrderByDescending(x => x.TimeOfPreparation);
                         StringBuilder stringMainCourses = new StringBuilder("");
+                        List<decimal> maincoursesTimes = new List<decimal>();
                         foreach (ProductItemDTO product in productsMainCourses)
                         {
                             stringMainCourses.Append(product.Quantity);
                             stringMainCourses.Append(" x ");
                             stringMainCourses.Append(product.ProductName);
                             stringMainCourses.Append(", \n");
+                            maincoursesTimes.Add(product.TimeOfPreparation);
                         }
                         OrderListDTO mainCourses = new OrderListDTO()
                         {
@@ -95,6 +102,7 @@ namespace VirtualWaiterCore.Data
                             Order = stringMainCourses.ToString(),
                             TimeOfOrder = item.TimeOfOrder,
                             TimeOfPreparation = productsMainCourses.Max(x => x.TimeOfPreparation),
+                            TimeOfPreparations = maincoursesTimes,
                             ProductType = Dictionaries.ProductType.MainCourse,
                         };
                         orders.Add(mainCourses);
@@ -113,13 +121,16 @@ namespace VirtualWaiterCore.Data
 
                     if (productsDeserts.Any())
                     {
+                        productsDeserts.OrderByDescending(x => x.TimeOfPreparation);
                         StringBuilder stringDeserts = new StringBuilder("");
+                        List<decimal> desertssTimes = new List<decimal>();
                         foreach (ProductItemDTO product in productsDeserts)
                         {
                             stringDeserts.Append(product.Quantity);
                             stringDeserts.Append(" x ");
                             stringDeserts.Append(product.ProductName);
                             stringDeserts.Append(", \n");
+                            desertssTimes.Add(product.TimeOfPreparation);
                         }
                         OrderListDTO deserts = new OrderListDTO()
                         {
@@ -130,6 +141,7 @@ namespace VirtualWaiterCore.Data
                             Order = stringDeserts.ToString(),
                             TimeOfOrder = item.TimeOfOrder,
                             TimeOfPreparation = productsDeserts.Max(x => x.TimeOfPreparation),
+                            TimeOfPreparations = desertssTimes,
                             ProductType = Dictionaries.ProductType.Dessert,
                         };
                         orders.Add(deserts);

@@ -1,6 +1,9 @@
 <template>
-    <form role="form" @submit.prevent="editMainCourse">
+    <form role="form" @submit.prevent="editMainCourseValidation">
         <br />
+        <div v-if="this.validation">
+            <h2 style="color: red">Musisz wypełnić wszystkie pola aby edytować produkt!</h2>
+        </div>
         <div class="form-group" width="500px" height="300px">
             <label for="image">Obraz</label>
             <file-uploader id="image" @change="onChangeImage"></file-uploader>
@@ -40,6 +43,7 @@
         name: "MainCourseEdit",
         data() {
             return {     
+                validation: false
             }
         },
         computed: {
@@ -49,6 +53,14 @@
             ...mapActions(name,['setMainCourseForm','editMainCourse', 'setImage']),
             onChangeImage(file) {
                 this.setImage(file.base64);
+            },
+            editMainCourseValidation() {
+                if (this.Name == '' || this.Description == '' || this.Image == '' || this.Price == 0 || this.TimeOfPreparation == 0) {
+                    this.validation = true
+                }
+                else {
+                    this.editMainCourse();
+                }
             }
         },
         mounted() {

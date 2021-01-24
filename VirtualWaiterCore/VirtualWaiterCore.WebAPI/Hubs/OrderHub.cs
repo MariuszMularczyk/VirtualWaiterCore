@@ -13,13 +13,9 @@ namespace VirtualWaiterCore.WebAPI
         {
             await Clients.All.SendAsync("TakeOrders", orders);
         }
-        public async Task GetDrinks(object orders)
+        public async Task GetDrinks(object drinks)
         {
-            await Clients.All.SendAsync("TakeDrinks", orders);
-        }
-        public async Task GetWaiter(object table)
-        {
-            await Clients.All.SendAsync("SendWaiter", table);
+            await Clients.All.SendAsync("TakeDrinks", drinks);
         }
     }
 }

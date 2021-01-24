@@ -19,6 +19,10 @@ namespace VirtualWaiterCore.Application
 
         public IProductRepository _productRepository { get; set; }
 
+        public ProductService(IProductRepository productRepository)
+        {
+            _productRepository = _=productRepository;
+        }
 
         public virtual void Add(ProductAddVM model, ProductType productType)
         {
@@ -41,7 +45,7 @@ namespace VirtualWaiterCore.Application
                 ms.Position = 0;
                 product.ImageTumb = ms.ToArray();
 
-                Image thumb2 = image.GetThumbnailImage(800, 470, () => false, IntPtr.Zero);
+                Image thumb2 = ResizeImage(image, 800, 470);
                 var ms2 = new MemoryStream();
                 thumb2.Save(ms2, ImageFormat.Png);
                 ms2.Position = 0;
@@ -50,6 +54,7 @@ namespace VirtualWaiterCore.Application
             catch (Exception e)
             {
                 product.Image = Convert.FromBase64String(model.Image);
+                product.ImageTumb = Convert.FromBase64String(model.Image);
             }
             _productRepository.Add(product);
             _productRepository.Save();
@@ -96,7 +101,7 @@ namespace VirtualWaiterCore.Application
                 ms.Position = 0;
                 product.ImageTumb = ms.ToArray();
 
-                Image thumb2 = image.GetThumbnailImage(800, 470, () => false, IntPtr.Zero);
+                Image thumb2 = ResizeImage(image, 800, 470);
                 var ms2 = new MemoryStream();
                 thumb2.Save(ms2, ImageFormat.Png);
                 ms2.Position = 0;
@@ -105,6 +110,7 @@ namespace VirtualWaiterCore.Application
             catch (Exception e)
             {
                 product.Image = Convert.FromBase64String(model.Image);
+                product.ImageTumb = Convert.FromBase64String(model.Image);
             }
             _productRepository.Edit(product);
             _productRepository.Save();
@@ -115,6 +121,19 @@ namespace VirtualWaiterCore.Application
             Product product = _productRepository.GetSingle(x => x.Id == id);
             _productRepository.Delete(product);
             _productRepository.Save();
+        }
+
+        private Image ResizeImage(Image image, int width, int height)
+        {
+            Bitmap result = new Bitmap(width, height);
+            using (Graphics graphics = Graphics.FromImage(result))
+            {
+                graphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+                graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+                graphics.DrawImage(image, 0, 0, result.Width, result.Height);
+            }
+            return result;
         }
 
     }

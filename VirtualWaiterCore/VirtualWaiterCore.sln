@@ -13,29 +13,33 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{BF6136D5-1
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{922D8E35-F422-4002-81D1-F2205F679FD3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualWaiterCore.Application.Abstraction", "VirtualWaiterCore.Application.Abstraction\VirtualWaiterCore.Application.Abstraction.csproj", "{1CA0CF64-CC2A-48E7-8249-FE5F2BD9853B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtualWaiterCore.Application.Abstraction", "VirtualWaiterCore.Application.Abstraction\VirtualWaiterCore.Application.Abstraction.csproj", "{1CA0CF64-CC2A-48E7-8249-FE5F2BD9853B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualWaiterCore.Application.Services", "VirtualWaiterCore.Application.Services\VirtualWaiterCore.Application.Services.csproj", "{26638012-CC79-4526-A4D3-58E41227293D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtualWaiterCore.Application.Services", "VirtualWaiterCore.Application.Services\VirtualWaiterCore.Application.Services.csproj", "{26638012-CC79-4526-A4D3-58E41227293D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualWaiterCore.Data.Abstraction", "VirtualWaiterCore.Data.Abstraction\VirtualWaiterCore.Data.Abstraction.csproj", "{204294C3-32A6-4DCF-8A32-43AA2FEB9C11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtualWaiterCore.Data.Abstraction", "VirtualWaiterCore.Data.Abstraction\VirtualWaiterCore.Data.Abstraction.csproj", "{204294C3-32A6-4DCF-8A32-43AA2FEB9C11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualWaiterCore.Data.Repositories", "VirtualWaiterCore.Data.Repositories\VirtualWaiterCore.Data.Repositories.csproj", "{810102AA-F9FF-441A-8BB2-05A3CCEB8785}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtualWaiterCore.Data.Repositories", "VirtualWaiterCore.Data.Repositories\VirtualWaiterCore.Data.Repositories.csproj", "{810102AA-F9FF-441A-8BB2-05A3CCEB8785}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualWaiterCore.EntityFramewrok", "VirtualWaiterCore.EntityFramewrok\VirtualWaiterCore.EntityFramewrok.csproj", "{9C66270E-3658-4C22-A3CE-8E57BE4487DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtualWaiterCore.EntityFramewrok", "VirtualWaiterCore.EntityFramewrok\VirtualWaiterCore.EntityFramewrok.csproj", "{9C66270E-3658-4C22-A3CE-8E57BE4487DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualWaiterCore.Dictionaries", "VirtualWaiterCore.Dictionaries\VirtualWaiterCore.Dictionaries.csproj", "{D9C1D449-FC0A-4BB5-B9EF-A28D6C11A3AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtualWaiterCore.Dictionaries", "VirtualWaiterCore.Dictionaries\VirtualWaiterCore.Dictionaries.csproj", "{D9C1D449-FC0A-4BB5-B9EF-A28D6C11A3AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualWaiterCore.Domain", "VirtualWaiterCore.Domain\VirtualWaiterCore.Domain.csproj", "{1B8C1AD9-4551-4852-8F69-427AE6B62C5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtualWaiterCore.Domain", "VirtualWaiterCore.Domain\VirtualWaiterCore.Domain.csproj", "{1B8C1AD9-4551-4852-8F69-427AE6B62C5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualWaiterCore.Domain.Core", "VirtualWaiterCore.Domain.Core\VirtualWaiterCore.Domain.Core.csproj", "{6940DFD9-54B2-47F3-90EF-7D5A40D082C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtualWaiterCore.Domain.Core", "VirtualWaiterCore.Domain.Core\VirtualWaiterCore.Domain.Core.csproj", "{6940DFD9-54B2-47F3-90EF-7D5A40D082C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualWaiterCore.Resources", "VirtualWaiterCore.Resources\VirtualWaiterCore.Resources.csproj", "{D67662A8-2642-4827-8178-25D9B3D0DD92}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtualWaiterCore.Resources", "VirtualWaiterCore.Resources\VirtualWaiterCore.Resources.csproj", "{D67662A8-2642-4827-8178-25D9B3D0DD92}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualWaiterCore.Infrastructure", "VirtualWaiterCore.Infrastructure\VirtualWaiterCore.Infrastructure.csproj", "{9A0A1667-24F6-4B2C-B315-F48AFD8A41E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtualWaiterCore.Infrastructure", "VirtualWaiterCore.Infrastructure\VirtualWaiterCore.Infrastructure.csproj", "{9A0A1667-24F6-4B2C-B315-F48AFD8A41E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualWaiterCore.Vue", "VirtualWaiterCore.Vue\VirtualWaiterCore.Vue.csproj", "{1722730E-D607-4B02-937D-D3D46E8777C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtualWaiterCore.Vue", "VirtualWaiterCore.Vue\VirtualWaiterCore.Vue.csproj", "{1722730E-D607-4B02-937D-D3D46E8777C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualWaiterCore.WebAPI", "VirtualWaiterCore.WebAPI\VirtualWaiterCore.WebAPI.csproj", "{E7A1106B-4B70-48A0-9FC1-4C057933BEC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtualWaiterCore.WebAPI", "VirtualWaiterCore.WebAPI\VirtualWaiterCore.WebAPI.csproj", "{E7A1106B-4B70-48A0-9FC1-4C057933BEC3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{779F3227-D318-4688-8790-D2AE86C86228}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualWaiterTests", "VirtualWaiterTests\VirtualWaiterTests.csproj", "{0B90583E-C932-49B2-BE44-4F03553E5E3A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,6 +95,10 @@ Global
 		{E7A1106B-4B70-48A0-9FC1-4C057933BEC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7A1106B-4B70-48A0-9FC1-4C057933BEC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7A1106B-4B70-48A0-9FC1-4C057933BEC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B90583E-C932-49B2-BE44-4F03553E5E3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B90583E-C932-49B2-BE44-4F03553E5E3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B90583E-C932-49B2-BE44-4F03553E5E3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B90583E-C932-49B2-BE44-4F03553E5E3A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -108,6 +116,7 @@ Global
 		{9A0A1667-24F6-4B2C-B315-F48AFD8A41E8} = {AFA0A8F8-22FE-41D6-9F7D-ABC7A3461360}
 		{1722730E-D607-4B02-937D-D3D46E8777C9} = {613D6DBF-7D2E-437B-A24B-5C5CF49B2674}
 		{E7A1106B-4B70-48A0-9FC1-4C057933BEC3} = {613D6DBF-7D2E-437B-A24B-5C5CF49B2674}
+		{0B90583E-C932-49B2-BE44-4F03553E5E3A} = {779F3227-D318-4688-8790-D2AE86C86228}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6AA63C67-511C-4943-887B-42CCE900E44C}

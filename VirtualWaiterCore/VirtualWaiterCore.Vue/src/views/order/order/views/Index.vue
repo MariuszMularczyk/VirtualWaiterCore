@@ -17,7 +17,7 @@
                     Desery
                 </vs-navbar-item>
                 <vs-navbar-item style="font-size: 1.85rem;" @click="forceRerender()" :active="active == 'Drinks'" id="Drinks">
-                    Drinki
+                    Napoje
                 </vs-navbar-item>
                 <template #right>
                     <vs-button style="font-size: 1.00rem;" gradient @click="getWaiter()">Wezwij kelnera</vs-button>

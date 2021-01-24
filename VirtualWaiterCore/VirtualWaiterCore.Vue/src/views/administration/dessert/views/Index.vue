@@ -7,7 +7,9 @@
                 Dodaj deser
             </router-link>
         </div>
-        <item-list style=" margin-bottom: 20px" v-for="dessert of getDessertsList()" :key="`dessert-${dessert.id}`" :item="dessert" :category="'Deser'" @editItem="editItem" @deleteItem="deleteDessert"></item-list>
+        <ul>
+        <li v-for="dessert of getDessertsList()" :key="`dessert-${dessert.id}`"><item-list style=" margin-bottom: 20px"  :item="dessert" :category="'Deser'" @editItem="editItem" @deleteItem="deleteDessert"></item-list></li>
+        </ul>
         <router-link :to="{name: 'administrationDashboard'}"><button type="default" class="btn btn-primary">Wróć</button></router-link>
         <br />
         <br />
@@ -57,4 +59,10 @@
             flex-direction: row
             button
                 margin-left: 10px
+</style>
+
+<style scoped >
+    ul {
+        list-style-type: none;
+    }
 </style>

@@ -3,7 +3,7 @@
     <div id="example" width="1500" style="text-align:center;">
         <br />
         <div class="form-group">
-            <h3 >Ustaw stolik</h3>
+            <h3 >Ustaw numer stolika</h3>
             <input style="width:50%; margin-left:25%;" v-model="Table" id="table" class="form-control">
         </div>
         <router-link :to="{name: 'order.menu'}"><button type="default" class="btn btn-primary">Dalej</button></router-link>

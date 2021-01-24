@@ -1,6 +1,9 @@
 <template>
-    <form role="form" @submit.prevent="editDrink">
+    <form role="form" @submit.prevent="editDrinkValidation">
         <br />
+        <div v-if="this.validation">
+            <h2 style="color: red">Musisz wypełnić wszystkie pola aby edytować produkt!</h2>
+        </div>
         <div class="form-group" width="300px" height="150px">
             <label for="image">Obraz</label>
             <file-uploader id="image" @change="onChangeImage"></file-uploader>
@@ -39,7 +42,7 @@
         name: "DrinkEdit",
         data() {
             return {
-                
+                validation: false
             }
         },
         computed: {
@@ -51,6 +54,14 @@
             onChangeImage(file) {
                 this.setImage(file.base64);
             },
+            editDrinkValidation() {
+                if (this.Name == '' || this.Description == '' || this.Image == '' || this.Price == 0 || this.TimeOfPreparation == 0) {
+                    this.validation = true
+                }
+                else {
+                    this.editDrink();
+                }
+            }
         },
         mounted() {
             this.setDrinkForm();

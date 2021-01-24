@@ -2,7 +2,7 @@
     <div id="example" style="text-align:center" width="1500">
         <br />
         <h1>Twoje zamówienie jest właśnie przygotowywane</h1>
-        <img class="imgsize" src="@/assets/images/preparingOrder.gif">
+        <img class="imgsize" src="@/assets/images/preparingOrder.png">
         <h1>Zapomiałeś czegoś?</h1>
 
        <h1 style="text-decoration: underline; cursor: pointer;" @click.prevent="returnToMenu()">Wroć do menu</h1>
