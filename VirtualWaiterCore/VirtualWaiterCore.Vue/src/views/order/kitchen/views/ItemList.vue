@@ -1,25 +1,39 @@
 ﻿<template>
-    <article class="blog-card">
-        <div class="article-details">
-            <h4 class="post-title">Stolik nr {{ item.table }}</h4>
-        </div>
-        <div class="article-details">
-            <h3 class="post-title">
-                {{ item.productTypeName }}
-                <span @click.prevent="readyToPickUp(item)" class="btn-span">
-                    <img class="buttons" src="@/assets/images/done.png">
-                </span>
-            </h3>
-
-            <p class="post-description">{{ item.order }}</p>
-        </div>
-    </article>
+    <div>
+        <h1>Kucharz {{index+1}}</h1>
+        <vs-card-group>
+            <div v-if="!item.length" style="text-align: center;">
+                <svg id="Layer_1" height="112" viewBox="0 0 150 150" width="112" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1"><circle cx="75" cy="75" fill="#21b3a9" r="64" /><path d="m115.63 82.2a4.94 4.94 0 0 0 -4.94-4.94 4.94 4.94 0 0 0 4.92-5.42 5.09 5.09 0 0 0 -5.13-4.46h-17.09l-.39-2 5-5.38a21.15 21.15 0 0 0 4.64-7.78 6.68 6.68 0 0 0 .37-1.45c.26-5.71-2.64-8.5-5.31-8.72-.72-.06-1.4-.29-1.83.29-2.39 6.7-5.77 11-9.94 13.44l-13.16 11.73-12.09 6.72-.74 28.77 14.06 3.9.5-.21v.21h36a5.09 5.09 0 0 0 5.13-4.46 4.94 4.94 0 0 0 -4.94-5.44 4.94 4.94 0 0 0 0-9.88 4.94 4.94 0 0 0 4.94-4.92z" fill="#fcd462" /><path d="m34.37 69.09h32.49v39.01h-32.49z" fill="#3a556a" /></svg>
+                <h1 style="text-align:center">Wszystkie zamówienia wydane</h1>
+            </div>
+            <vs-card v-for="order in  item " :key="`${order.id}`">
+                <template #title>
+                    <h3>Stolik nr {{order.table}}</h3>
+                    <h1>{{order.productTypeName}}</h1>
+                </template>
+                <template #text>
+                    <div>
+                        <h3>
+                            {{order.productName}}
+                        </h3>
+                        <br />
+                        <vs-button square
+                                   success
+                                   flat
+                                   @click.prevent="readyToPickUp(order)">
+                            <h4>Zrobione!!</h4>
+                        </vs-button>
+                    </div>
+                </template>
+            </vs-card>
+        </vs-card-group>
+    </div>
 </template>
 
 <script>
     export default {
         name: "ItemList",
-        props: ['item'],
+        props: ['item', 'index'],
         data() {
             return {
             }
@@ -30,7 +44,7 @@
             readyToPickUp(item) {
                 this.$emit('readyToPickUp', item)
             },
-            
+
         },
         mounted() {
 
@@ -41,147 +55,16 @@
 <style scoped lang="scss">
     @import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
 
-    $bg: #eedfcc;
-    $text: #777;
-    $black: #121212;
-    $white: #fff;
-    $red: #e04f62;
-    $border: #ebebeb;
-    $shadow: rgba(0, 0, 0, 0.2);
-
-    @mixin transition($args...) {
-        transition: $args;
-    }
-
-    * {
-        box-sizing: border-box;
-        &::before, &::after
-
-    {
-        box-sizing: border-box;
-    }
-
-    }
-
+   
     .buttons {
         width: 50px;
         height: 50px;
     }
-    .btn-span {
-        float: right;
-        margin-left: 8px;
-    }
-    .buttons:hover {
-        cursor: pointer;
-    }
-    .blog-card {
-        display: flex;
-        flex-direction: row;
-        background: $white;
-        box-shadow: 0 0.1875rem 1.5rem $shadow;
-        border-radius: 0.375rem;
-        overflow: hidden;
+
+    #style-1::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        border-radius: 10px;
+        background-color: #F5F5F5;
     }
 
-    .card-link {
-        position: relative;
-        display: block;
-        color: inherit;
-        text-decoration: none;
-        &:hover .post-title
-
-    {
-        @include transition(color 0.3s ease);
-        color: $red;
-    }
-
-    &:hover .post-image {
-        @include transition(opacity 0.3s ease);
-        opacity: 0.9;
-    }
-
-    }
-
-    .post-image {
-        @include transition(opacity 0.3s ease);
-        display: block;
-        width: 100%;
-        object-fit: cover;
-    }
-
-    .article-details {
-        padding: 1.5rem;
-    }
-
-    .post-category {
-        display: inline-block;
-        text-transform: uppercase;
-        font-size: 0.75rem;
-        font-weight: 700;
-        line-height: 1;
-        letter-spacing: 0.0625rem;
-        margin: 0 0 0.75rem 0;
-        padding: 0 0 0.25rem 0;
-        border-bottom: 0.125rem solid $border;
-    }
-
-    .post-title {
-        @include transition(color 0.3s ease);
-        font-size: 1.125rem;
-        line-height: 1.4;
-        color: $black;
-        font-weight: 700;
-        margin: 0 0 0.5rem 0;
-    }
-
-    .post-author {
-        font-size: 0.875rem;
-        line-height: 1;
-        margin: 1.125rem 0 0 0;
-        padding: 1.125rem 0 0 0;
-        border-top: 0.0625rem solid $border;
-    }
-
-    @media (max-width: 40rem) {
-        #container {
-            width: 18rem;
-            height: 27.25rem;
-        }
-
-        .blog-card {
-            flex-wrap: wrap;
-        }
-    }
-
-    @supports (display: grid) {
-        body {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-gap: 0.625rem;
-            grid-template-areas: ". main main ." ". main main .";
-        }
-
-        #container {
-            grid-area: main;
-            align-self: center;
-            justify-self: center;
-        }
-
-        .post-image {
-            height: 100%;
-        }
-
-        .blog-card {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            grid-template-rows: 1fr;
-        }
-
-        @media (max-width: 40rem) {
-            .blog-card {
-                grid-template-columns: auto;
-                grid-template-rows: 12rem 1fr;
-            }
-        }
-    }
 </style>

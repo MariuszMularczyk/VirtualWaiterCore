@@ -13,9 +13,11 @@ namespace VirtualWaiterCore.Application
 {
     public interface IOrderService : IService
     {
-        List<OrderListDTO> Add(OrderAddVM model);
-        List<OrderListDTO> GetOrders();
+        List<List<ProductItemDataDTO>> Add(OrderAddVM model);
+        List<List<ProductItemDataDTO>> GetOrders();
         List<OrderListDTO> GetDrinks();
+        List<List<ProductItemDataDTO>> SetStatus(int orderId);
+        void SetCoocks(int orderId);
         void SetStatus(int orderId, int productType);
     }
 }

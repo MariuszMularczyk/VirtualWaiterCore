@@ -12,11 +12,12 @@ namespace VirtualWaiterCore.Data
 {
     public class ProductItemDTO
     {
-        public ProductType ProductType { get; set; }
-        public int Quantity { get; set; }
-        public int OrderId { get; set; }
+        public ProductType? ProductType { get; set; }
+        public int? Quantity { get; set; }
+        public int? OrderId { get; set; }
         public string ProductName { get; set; }
-        public decimal TimeOfPreparation { get; set; }
+        public decimal? TimeOfPreparation { get; set; }
+        public int? ProductId { get; set; }
 
     }
 }

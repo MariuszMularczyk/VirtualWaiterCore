@@ -12,6 +12,7 @@ namespace VirtualWaiterCore.Dictionaries
     {
         ADIPAddress = 0,
         ADDomainName = 1,
+        NumberOfCooks = 2,
         ApplicationWebAddress = 6,
     }
 }

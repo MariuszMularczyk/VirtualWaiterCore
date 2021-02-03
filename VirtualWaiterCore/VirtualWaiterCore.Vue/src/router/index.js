@@ -105,5 +105,10 @@ export default new Router({
         name: 'order.completeOrder',
         component: () => import('@/views/order/order/views/CompleteOrder')
     },
+    {
+        path: '/kitchen/coocks',
+        name: 'kitchen.coocks',
+        component: () => import('@/views/order/kitchen/views/SetCoocks')
+    },
   ]
 });

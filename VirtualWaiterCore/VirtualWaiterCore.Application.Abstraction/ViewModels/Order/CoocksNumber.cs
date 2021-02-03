@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace VirtualWaiterCore.Application
 {
-    public class OrderStatus
+    public class CoocksNumber
     {
 
-        public int OrderId { get; set; }
+        public int NumberOfCoocks { get; set; }
     }
 }
 

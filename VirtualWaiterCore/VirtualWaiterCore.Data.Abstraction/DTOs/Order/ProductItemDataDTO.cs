@@ -10,18 +10,18 @@ using System.Threading.Tasks;
 
 namespace VirtualWaiterCore.Data
 {
-    public class OrderListDTO
+    public class ProductItemDataDTO
     {
-        public int OrderItemId { get; set; }
+        public int Id { get; set; }
+        public ProductType ProductType { get; set; }
+        public int? Priority { get; set; }
+        public decimal? Measure { get; set; }
         public int OrderId { get; set; }
         public string Table { get; set; }
+        public string ProductName { get; set; }
         public string ProductTypeName { get; set; }
-        public DateTime TimeOfOrder { get; set; }
-        public DateTime? TimeOfSugestedPrepare { get; set; }
-        public decimal? TimeOfPreparation { get; set; }
-        public List<decimal> TimeOfPreparations { get; set; }
-        public string Order { get; set; }
-        public ProductType ProductType { get; set; }
+        public decimal TimeOfPreparation { get; set; }
+
     }
 }
 

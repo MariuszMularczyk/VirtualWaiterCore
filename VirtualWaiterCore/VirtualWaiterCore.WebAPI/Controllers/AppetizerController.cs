@@ -32,17 +32,17 @@ namespace VirtualWaiterCore.WebAPI.Controllers
         }
 
         [HttpGet("getAppetizers")]
-        public List<ProductListDTO> GetDrinks()
+        public List<ProductListDTO> GetProducts()
         {
             return _productService.GetProducts(ProductType.Appetizer);
         }
         [HttpGet("getAppetizersToMenu")]
-        public List<ProductListDTO> GetDrinksToMenu()
+        public List<ProductListDTO> GetProductsToMenu()
         {
             return _productService.GetProductsToMenu(ProductType.Appetizer);
         }
         [HttpGet("getAppetizer/{id}")]
-        public ProductEditVM GetDrink(int id)
+        public ProductEditVM GetProduct(int id)
         {
             return _productService.GetProduct(id);
         }
@@ -53,7 +53,7 @@ namespace VirtualWaiterCore.WebAPI.Controllers
         }
 
         [HttpDelete("deleteAppetizer/{id}")]
-        public void DeleteAppetizer(int id)
+        public void Delete(int id)
         {
             _productService.Delete(id);
         }

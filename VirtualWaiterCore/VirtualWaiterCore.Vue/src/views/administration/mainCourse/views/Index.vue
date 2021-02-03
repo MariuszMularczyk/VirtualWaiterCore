@@ -12,6 +12,10 @@
 
         <router-link :to="{name: 'administrationDashboard'}"><button type="default" class="btn btn-primary">Wróć</button></router-link>
         <br /><br />
+        <div class="text-center" style=" position: fixed; bottom: 0; right:0; text-align: center"
+             cols="12">
+            <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+        </div>
     </div>
 </template>
 

@@ -6,8 +6,13 @@
             <h1 style="text-align:center">Wszystkie zamówienia wydane</h1>
         </div>
         <br />
-        <item-list style=" margin-bottom: 20px" v-for="drink of drinksOrderList" :key="`drink-${drink.orderItemId}`" :item="drink"  @done="done"></item-list>
+        <item-list style=" margin-bottom: 20px" v-for="drink of drinksOrderList" :key="`drink-${drink.orderItemId}`" :item="drink" @done="done"></item-list>
         <br />
+        <div class="text-center" style=" position: fixed; bottom: 0; left:0; text-align: center"
+             cols="12">
+            <div>Icons made by <a href="https://www.flaticon.com/authors/dinosoftlabs" title="DinosoftLabs">DinosoftLabs</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+            <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+        </div>
     </div>
 
 </template>
@@ -46,10 +51,8 @@
             ...mapGetters(name, ['getDrinksOrdersList']),
             ...mapActions(name, ['setDrinksOrderList']),
             done(order) {
-                axios.post(`order/setStatus`, { orderId: order.orderId, productType: order.productType })
-                    .then(() => {
-                        this.drinksOrderList = this.drinksOrderList.filter(orderElement => orderElement !== order);
-                    })
+                axios.post(`order/setStatusDrinks`, { orderId: order.orderId, productType: order.productType })
+                   
             }
         },
         mounted() {

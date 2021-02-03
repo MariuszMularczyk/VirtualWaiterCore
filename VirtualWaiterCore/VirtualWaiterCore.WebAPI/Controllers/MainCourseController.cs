@@ -32,17 +32,17 @@ namespace VirtualWaiterCore.WebAPI.Controllers
         }
         
         [HttpGet("getMainCourses")]
-        public List<ProductListDTO> GetMainCourses()
+        public List<ProductListDTO> GetProducts()
         {
             return _productService.GetProducts(ProductType.MainCourse);
         }
         [HttpGet("getMainCoursesToMenu")]
-        public List<ProductListDTO> GetMainCoursesToMenu()
+        public List<ProductListDTO> GetProductsToMenu()
         {
             return _productService.GetProductsToMenu(ProductType.MainCourse);
         }
         [HttpGet("getMainCourse/{id}")]
-        public ProductEditVM GetMainCourse(int id)
+        public ProductEditVM GetProduct(int id)
         {
             return _productService.GetProduct(id);
         }
@@ -54,7 +54,7 @@ namespace VirtualWaiterCore.WebAPI.Controllers
         }
 
         [HttpDelete("deleteMainCourse/{id}")]
-        public void DeleteMainCourse(int id)
+        public void Delete(int id)
         {
             _productService.Delete(id);
         }

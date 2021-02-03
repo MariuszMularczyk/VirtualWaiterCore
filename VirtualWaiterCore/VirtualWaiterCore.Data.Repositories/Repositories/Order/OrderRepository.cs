@@ -13,7 +13,7 @@ namespace VirtualWaiterCore.Data
         public OrderRepository(MainDatabaseContext context) : base(context)
         { }
 
-        public virtual List<OrderListDTO> GetOrders()
+/*        public virtual List<OrderListDTO> GetOrders()
         {
             List<OrderListDTO> orders = new List<OrderListDTO>();
 
@@ -149,7 +149,90 @@ namespace VirtualWaiterCore.Data
                 }
             }
             return orders;
+        }*/
+
+        public virtual List<ProductItemDataDTO> GetOrders()
+        {
+            List<ProductItemDataDTO> orders = new List<ProductItemDataDTO>();
+
+            List<OrderItemDTO> ordersId = Context.Orders.Select(x => new OrderItemDTO()
+            {
+                OrderId = x.Id,
+                Table = x.Table,
+                OrderStatus = x.OrderStatus,
+                TimeOfOrder = x.TimeOfOrder,
+                AppetizerStatus = x.AppetizerStatus,
+                MainCourseStatus = x.MainCourseStatus,
+                DessertsStatus = x.DessertsStatus
+            }).Where(x => x.OrderStatus != Dictionaries.OrderStatusEnum.Done).ToList();
+            int OrderItemId = 1;
+            foreach (OrderItemDTO item in ordersId)
+            {
+                int appetizerPriority = 0;
+                int mainCopursesPriority = 0;
+                int dessertPriority = 0;
+                List<ProductItemDataDTO> products = Context.ProductsOrders.Where(x => x.OrderId == item.OrderId && x.Status != Dictionaries.OrderStatusEnum.Done && x.Product.ProductType != Dictionaries.ProductType.Drink).Select(x => new ProductItemDataDTO()
+                {
+                    Id = x.Id,
+                    ProductName = x.Product.Name,
+                    ProductType = x.Product.ProductType,
+                    OrderId = x.OrderId,
+                    Table = x.Order.Table,
+                    TimeOfPreparation = x.Product.TimeOfPreparation
+                }).ToList();
+
+                if(products.Any(x => x.ProductType == Dictionaries.ProductType.Appetizer) && products.Any(x => x.ProductType == Dictionaries.ProductType.MainCourse))
+                {
+                    appetizerPriority = 1;
+                    mainCopursesPriority = 2;
+                    dessertPriority = 10;
+                }
+                else if (products.Any(x => x.ProductType == Dictionaries.ProductType.Appetizer) )
+                {
+                    appetizerPriority = 1;
+                    dessertPriority = 2;
+                    mainCopursesPriority = 999;
+                    
+                }
+                else if (products.Any(x => x.ProductType == Dictionaries.ProductType.MainCourse))
+                {
+                    appetizerPriority = 999;
+                    dessertPriority = 10;
+                    mainCopursesPriority = 1;
+
+                }
+                else 
+                {
+                    appetizerPriority = 999;
+                    dessertPriority = 1;
+                    mainCopursesPriority = 999;
+
+                }
+
+                foreach(ProductItemDataDTO product in products)
+                {
+                    switch (product.ProductType)
+                    {
+                        case Dictionaries.ProductType.Appetizer:
+                            product.Priority = appetizerPriority;
+                            product.ProductTypeName = "Przystawka";
+                            break;
+                        case Dictionaries.ProductType.MainCourse:
+                            product.Priority = mainCopursesPriority;
+                            product.ProductTypeName = "Danie g³ówne";
+                            break;
+                        case Dictionaries.ProductType.Dessert:
+                            product.Priority = dessertPriority;
+                            product.ProductTypeName = "Deser";
+                            break;
+                    }
+                }
+                orders.AddRange(products);
+            }
+
+            return orders;
         }
+
 
         public virtual List<OrderListDTO> GetDrinks()
         {
@@ -168,14 +251,26 @@ namespace VirtualWaiterCore.Data
             {
                 if (item.DrinksStatus == Dictionaries.OrderStatusEnum.Awaiting)
                 {
-                    List<ProductItemDTO> drinks = Context.ProductsOrders.Select(x => new ProductItemDTO()
+                    List<ProductItemDTO> drinksb = Context.ProductsOrders.Select(x => new ProductItemDTO()
                     {
-                        Quantity = x.Quantity,
+                        ProductId = x.ProductId,
                         ProductName = x.Product.Name,
                         ProductType = x.Product.ProductType,
                         OrderId = x.OrderId,
                         TimeOfPreparation = x.Product.TimeOfPreparation
                     }).Where(x => x.ProductType == Dictionaries.ProductType.Drink && x.OrderId == item.OrderId).ToList();
+
+                    List<ProductItemDTO> drinks =
+                    drinksb.GroupBy(x => x)
+                    .Select(x => new ProductItemDTO()
+                    {
+                        Quantity = x.Count(),
+                        ProductName = x.Key.ProductName,
+                        OrderId = x.First().OrderId
+                    })
+                    .OrderByDescending(x => x.Quantity).ToList();
+
+
 
                     if (drinks.Any())
                     {
@@ -194,7 +289,6 @@ namespace VirtualWaiterCore.Data
                             Table = item.Table,
                             Order = stringDrinks.ToString(),
                             TimeOfOrder = item.TimeOfOrder,
-                            TimeOfPreparation = drinks.Max(x => x.TimeOfPreparation),
                             ProductType = Dictionaries.ProductType.Drink,
                         };
                         orders.Add(appetizers);

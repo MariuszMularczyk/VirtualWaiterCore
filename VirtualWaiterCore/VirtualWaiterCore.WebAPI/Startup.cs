@@ -77,6 +77,9 @@ namespace VirtualWaiterCore.WebAPI
             builder.RegisterType<ProductRepository>().As<IProductRepository>().PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies).InstancePerLifetimeScope();
             builder.RegisterType<ProductRepository>().As<ProductRepository>().PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies).InstancePerLifetimeScope();
 
+            builder.RegisterType<AppSettingsRepository>().As<IAppSettingsRepository>().PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies).InstancePerLifetimeScope();
+            builder.RegisterType<AppSettingsRepository>().As<AppSettingsRepository>().PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies).InstancePerLifetimeScope();
+
             builder.RegisterType<OrderService>().As<IOrderService>().PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies).InstancePerLifetimeScope();
             builder.RegisterType<OrderService>().As<OrderService>().PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies).InstancePerLifetimeScope();
             builder.RegisterType<OrderRepository>().As<IOrderRepository>().PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies).InstancePerLifetimeScope();

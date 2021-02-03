@@ -54,9 +54,26 @@ namespace VirtualWaiterCore.WebAPI.Controllers
         }
 
         [HttpPost("setStatus")]
-        public void SetStatus(OrderStatus order)
+        public async void SetStatus(OrderStatus order)
         {
-             _orderService.SetStatus(order.OrderId, order.ProductType);
+            var list =  _orderService.SetStatus(order.OrderId);
+
+            HubConnection connection = new HubConnectionBuilder().WithUrl("https://localhost:44379/kitchen/ordersHub").Build();
+
+            await connection.StartAsync();
+            await connection.InvokeAsync("GetOrders", list);
+        }
+
+        [HttpPost("setStatusDrinks")]
+        public void SetStatusDrinks(OrderStatusDrink order)
+        {
+            _orderService.SetStatus(order.OrderId, order.ProductType);
+        }
+
+        [HttpPost("setCoocks")]
+        public void SetCoocks(CoocksNumber number)
+        {
+            _orderService.SetCoocks(number.NumberOfCoocks);
         }
 
     }

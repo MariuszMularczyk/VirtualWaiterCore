@@ -42,7 +42,7 @@ namespace VirtualWaiterCore.WebAPI.Controllers
             return _productService.GetProductsToMenu(ProductType.Dessert);
         }
         [HttpGet("getDessert/{id}")]
-        public ProductEditVM GetDessert(int id)
+        public ProductEditVM GetProduct(int id)
         {
             return _productService.GetProduct(id);
         }
@@ -52,7 +52,7 @@ namespace VirtualWaiterCore.WebAPI.Controllers
             _productService.Edit(model);
         }
         [HttpDelete("deleteDessert/{id}")]
-        public void DessertDrink(int id)
+        public void Delete(int id)
         {
             _productService.Delete(id);
         }
